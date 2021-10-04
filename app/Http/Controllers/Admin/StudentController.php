@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Quest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class QuestController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class QuestController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -25,7 +25,7 @@ class QuestController extends Controller
      */
     public function create()
     {
-        return view('backend.quest.create');
+        //
     }
 
     /**
@@ -42,10 +42,10 @@ class QuestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Quest  $quest
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Quest $quest)
+    public function show(User $user)
     {
         //
     }
@@ -53,10 +53,10 @@ class QuestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Quest  $quest
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Quest $quest)
+    public function edit(User $user)
     {
         //
     }
@@ -65,10 +65,10 @@ class QuestController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Quest  $quest
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quest $quest)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -76,10 +76,10 @@ class QuestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Quest  $quest
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Quest $quest)
+    public function destroy(User $user)
     {
         //
     }

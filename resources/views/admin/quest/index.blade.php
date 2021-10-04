@@ -1,9 +1,9 @@
-@extends('layouts.admin')
+@extends('admin.layouts.template')
 
 @section('css')
   
     <!-- DataTables -->
-  <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/dataTable.min.css') }}">  
+  <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/dataTable.min.css') }}">  
   
   <link rel="stylesheet" type="text/css" href=" https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap4.min.css">  
   

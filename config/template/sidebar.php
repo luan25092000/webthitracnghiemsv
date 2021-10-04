@@ -2,7 +2,7 @@
     return  [
         [
             'label' => 'Quản lý kết quả thi',
-            'route' => 'admin.dashboard',
+            'route' => 'admin.dashboard.index',
             'icon' => 'floor-plan',
         ],[
             'label' => 'Quản lý sinh viên',
