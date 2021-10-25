@@ -2,8 +2,8 @@
     return  [
         [
             'label' => 'Quản lý kết quả thi',
-            'route' => 'admin.dashboard.index',
-            'icon' => 'floor-plan',
+            'route' => 'dashboard.index',
+            'icon' => 'mdi mdi-marker-check',
         ],[
             'label' => 'Quản lý sinh viên',
             'icon' => 'account-circle-outline',
@@ -11,39 +11,45 @@
             'items' => [
                 [
                     'label' => 'Danh sách',
-                    'route' => 'student.index',
+                    'route' => 'listing.index',
+                    'model' => 'user',
                 ],
                 [
                     'label' => 'Tạo mới',
-                    'route' => 'student.create',
+                    'route' => 'create.index',
+                    'model' => 'user',
                 ]
             ]
         ],[
             'label' => 'Quản lý giáo viên',
-            'icon' => 'contact-mail',
+            'icon' => 'contact-mail-outline',
             'tag'   => 'form-elements',
             'items' => [
                 [
                     'label' => 'Danh sách',
-                    'route' => 'teacher.index',
+                    'route' => 'listing.index',
+                    'model' => 'admin',
                 ],
                 [
                     'label' => 'Tạo mới',
-                    'route' => 'teacher.create',
+                    'route' => 'create.index',
+                    'model' => 'admin',
                 ]
             ]
         ],[
-            'label' => 'Quản lý chủ đề',
-            'icon' => 'table',
+            'label' => 'Quản lý lớp học',
+            'icon' => 'floor-plan',
             'tag'   => 'charts',
             'items' => [
                 [
                     'label' => 'Danh sách',
-                    'route' => 'theme.index',
+                    'route' => 'listing.index',
+                    'model' => 'room',
                 ],
                 [
                     'label' => 'Tạo mới',
-                    'route' => 'theme.create',
+                    'route' => 'create.index',
+                    'model' => 'room',
                 ]
             ]
         ],[
@@ -53,11 +59,13 @@
             'items' => [
                 [
                     'label' => 'Danh sách',
-                    'route' => 'quest.index',
+                    'route' => 'listing.index',
+                    'model' => 'question',
                 ],
                 [
                     'label' => 'Tạo mới',
-                    'route' => 'quest.create',
+                    'route' => 'create.index',
+                    'model' => 'question',
                 ]
             ]
         ],[
@@ -67,23 +75,19 @@
             'items' => [
                 [
                     'label' => 'Danh sách',
-                    'route' => 'exam.index',
+                    'route' => 'listing.index',
+                    'model' => 'subject',
                 ],
                 [
                     'label' => 'Tạo mới',
-                    'route' => 'exam.create',
+                    'route' => 'create.index',
+                    'model' => 'subject',
                 ]
             ]
         ],[
             'label' => 'Xếp hạng sinh viên',
+            'route' => 'rank.index',
             'icon' => 'chart-line',
-            'tag'   => 'auth',
-            'items' => [
-                [
-                    'label' => 'Danh sách',
-                    'route' => 'rank.index',
-                ],
-            ]
         ]
     ]
 

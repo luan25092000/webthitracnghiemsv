@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="topbar">
+                <a href="">logout</a>
+                <a href="">support</a>
+                <a href="">work</a>
+                <a href="">home</a>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mt-1">
+                    <div class="card text-center sidebar">
+                        <div class="card-body">
+                            <img src="{{ asset('admin/images/avatar.svg') }}" alt="" class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h3>Burk Macklin</h3>
+                                <a href="">Home</a>
+                                <a href="">work</a>
+                                <a href="">support</a>
+                                <a href="">setting</a>
+                                <a href=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 mt-1">
+                    <div class="card mb-3 content">
+                        <h1 class="m-3 pt-3">about</h1>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Full Name</h5>
+                                </div>
+                                <div class="col-md-9 text-secondary">
+                                    Burt Macklin
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Email</h5>
+                                </div>
+                                <div class="col-md-9 text-secondary">
+                                    abc@gmail.com
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>phone</h5>
+                                </div>
+                                <div class="col-md-9 text-secondary">
+                                    0987654
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Address</h5>
+                                </div>
+                                <div class="col-md-9 text-secondary">
+                                    street ABC
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3 content">
+                        <h1 class="m-3">Recent Project</h1>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Project Name</h5>
+                                </div>
+                                <div class="col-md-9 text-secondary">
+                                    Project Description
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button onclick="history.back()" id="printPageButton" class="btn btn-info"><i class="fa fa-print"></i>Quay lại</button>
+        <button onclick="window.print()" id="printPageButton" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+    </div>
+</body>
+</html>
