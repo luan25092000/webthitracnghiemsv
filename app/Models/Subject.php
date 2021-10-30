@@ -4,7 +4,6 @@ namespace App\Models;
 use \App\Models\Question;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Subject extends Question
 {
@@ -34,8 +33,12 @@ class Subject extends Question
     public function rulesUpdate($id){        
         return $rules = [
             'name'    => 'required',
-            'email' => 'required|unique:admins,email,'.$id,
+            'description' => 'required|max:255',
             'password' => 'required',
+            'theme_id' => 'required',
+            'time' => 'required',
+            'question_ids' => 'required|nullable',
+            'level' => 'required',
         ];
     }
     public $messages = [
@@ -102,10 +105,10 @@ class Subject extends Question
                 'field' => 'theme_id',
                 'name' => 'Lớp',
                 'type' => 'select_rela',
-                'relation' => 'room',
+                'relation' => 'theme',
                 'get' => 'name',
                 'model' => 'Class',
-                'records' => Room::select('id', 'name')->get(),
+                'records' => Theme::select('id', 'name')->get(),
                 'listing' => true,
                 'creating' => true
             ),   
@@ -181,29 +184,17 @@ class Subject extends Question
                 'creating' => true
             ),
             array(
-                'field' => 'quest_count',
+                'field' => 'question_count',
                 'name' => 'Số câu hỏi',
                 'type' => 'count',
                 'model' => 'Question',
-                'records' => $this->getSumQuestion(),
                 'listing' => true,
                 'creating' => true
             ),              
         );
         return array_merge($listingConfigs, $defaultConfigs);
     }
-    public function getSumQuestion(){
-        $array = DB::table('question_mapping')
-            ->select('subject_id', DB::raw('count(*) as total'))
-            ->groupBy('subject_id')
-            ->get();
-        $data = [];
-        foreach ($array as $a) {
-            $data[$a->subject_id] = $a->total;           
-        }
-        // dd($data);
-        return $data;
-    }
+
     public function configsParent() {
         $model = new Question();
         $configs = $model->configs();
@@ -228,27 +219,7 @@ class Subject extends Question
         return $result;
     }
     public function getRecords() {  
-        return self::all();   
-        // $array = DB::select('select COUNT(a.id) quest_count,a.*
-        //                     from subjects a, question_mapping b
-        //                 where a.id=b.subject_id
-        //                 GROUP BY b.subject_id
-        //                 ');
-                       
-        // $data = [];
-        // foreach ($array as $a) {
-        //     $data[] = (array)$a;           
-        // }
-        // return $data;
-
-        // $a=  DB::table("subjects" , "question_mapping")
-        // ->select("count (subjects.id)", "subjects.*")
-        // ->where("subjects.id", "=", "question_mapping.subject_id")
-        // ->get();
-        // $a = DB::table("subjects")
-        // ->join('question_mapping', 'subjects.id', '=', 'question_mapping.subject_id')
-        // ->select('subjects.*')
-        // ->get();
+        return self::withCount('question')->get();   
     }
     public function question(){
         return $this->belongsToMany(Question::class, 'question_mapping');
@@ -256,8 +227,8 @@ class Subject extends Question
     public function teacher(){
         return $this->belongsTo(Admin::class, 'user_id');
     }
-    public function room(){
-        return $this->belongsTo(Room::class, 'theme_id');
+    public function theme(){
+        return $this->belongsTo(Theme::class, 'theme_id');
     }
     public function result(){
         return $this->hasMany(Result::class);

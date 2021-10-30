@@ -1,4 +1,4 @@
-$('#room').change(function () {
+$('#theme').change(function () {
     var id = $(this).find(':selected').val();
     $.ajaxSetup({
         headers: {
@@ -25,7 +25,7 @@ $('#room').change(function () {
 });
 
 $("#btnShow").click(function(){
-    var room_id = $('#room').find(':selected').val();
+    var theme_id = $('#theme').find(':selected').val();
     var subject_id = $('#subject').find(':selected').val();
     // alert(subject_id);
     $.ajaxSetup({
@@ -37,12 +37,14 @@ $("#btnShow").click(function(){
         type: 'POST',
         url: 'showtable',
         data: {
-            'room_id': room_id,
+            'theme_id': theme_id,
             'subject_id': subject_id
         },
         dataType: 'json',
         success: function (data) {
+           
             var $subject = $('#example');
+            $subject.children().remove();
             var html = '<thead>\n'+
                             '<tr>\n'+
                                 '<th>Tên</th>\n'+
@@ -52,6 +54,9 @@ $("#btnShow").click(function(){
                             '</tr>\n'+  
                         '</thead>\n'+
                         '<tbody>';
+            if(data.length == 0) {
+                html += '<td colspan="4" class="text-center">Chưa có bài thi nào</td>'
+            }
             for (var i = 0; i < data.length; i++) {
                 var rank = i+1;
                 var result = data[i].result.split("/")
@@ -60,7 +65,7 @@ $("#btnShow").click(function(){
                             '<td>'+ data[i].student.name + '</td>\n'+
                             '<td>'+ score + '/10</td>\n'+
                             '<td>'+ rank + '</td>\n'+
-                            '<td><a href="/ad/profile" class="btn btn-outline-info btn-icon-text"><i class="ti-printer btn-icon-append"></i> Print</a></td>\n'+
+                            '<td><a href="/ad/profile/'+ data[i].id +'/'+ rank +'" class="btn btn-outline-info btn-icon-text"><i class="ti-printer btn-icon-append"></i> Print</a></td>\n'+
                         '</tr>\n';
             }
             html +=  '</tbody>';

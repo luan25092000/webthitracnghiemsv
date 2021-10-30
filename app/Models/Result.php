@@ -48,7 +48,7 @@ class Result extends Base
                 'name' => 'Lớp',
                 'type' => 'relaOfRela',
                 'relation' => 'subject',
-                'get' => 'room',
+                'get' => 'theme',
                 'value' => 'name',
                 'listing' => true,
             ),
@@ -80,7 +80,7 @@ class Result extends Base
     }
     
     public function excute($arrays, $subject_id) {
-        $subject_id = 8;
+        // $subject_id = 8;
         $data = [];
         foreach($arrays as $array) {
             $ansArr = explode('-', $array);
@@ -93,14 +93,19 @@ class Result extends Base
         try {
             $userId = Auth::user()->id;
             $countFail = $this->calculate($data);
-            $result = (count($data) - $countFail) . '/' . $this->getCount($subject_id);
-            
+            $score = (count($data) - $countFail);
+            $result =  $score. '/' . $this->getCount($subject_id);
+            $endTest = [
+                'score' => $score,
+                'result' => $result
+            ];
+
             $resultId = $this->createResult($subject_id, $userId, $result);
             $this->insertResultQuestion($resultId, $data);
         } catch (\Exception $exception) {
             throw new \Exception();
         }
-        return ;
+        return $endTest;
     
     }
 
@@ -137,15 +142,17 @@ class Result extends Base
     }
 
     public function getCount($subject_id) {
-        return DB::table('question_mapping')->where('subject_id', $subject_id)->count();
+        // return DB::table('question_mapping')->where('subject_id', $subject_id)->count();
+        return self::with('questions')->where('subject_id', $subject_id)->count();
     }
     public function insertResultQuestion($resultId, $data) {
-        $model = DB::table('result_mapping');
+        // $model = DB::table('result_mapping');
+        $model = new Result();
         foreach ($data as $key => $item) {
             if (is_array($item)) {
                 $item = implode(',', $item);
             }
-            $model->insert([
+            $model->questions()->insert([
                 'result_id' => $resultId,
                 'question_id' => $key,
                 'selected' => $item   
@@ -167,5 +174,8 @@ class Result extends Base
     }
     public function subject(){
         return $this->belongsTo(Subject::class, 'subject_id');
+    }
+    public function questions(){
+        return $this->belongsToMany(Question::class, 'result_mapping')->withPivot('selected')->withTimestamps();
     }
 }

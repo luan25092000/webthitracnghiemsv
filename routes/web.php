@@ -40,32 +40,35 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
         Route::put('/editing/{model}/{id}', 'EditController@update')->name('editing.update');
         Route::get('/destroy/{model}/{id}', 'ListingController@destroy')->name('listing.destroy');
         Route::get('/rank', 'DashboardController@rank')->name('rank.index');
-        Route::get('/profile', 'DashboardController@profile')->name('profile.index');
+        Route::get('/profile/{result}/{rank}', 'DashboardController@profile')->name('profile.index');
         Route::get('/print', 'DashboardController@print')->name('print');
         Route::post('/showtable', 'DashboardController@showTable')->name('rank.showtable');
         Route::post('/getdata', 'DashboardController@getData')->name('rank.getData');
-
-        // Route::resources([
-        //     'student'   => 'StudentController',
-        //     'teacher'   => 'TeacherController',
-        //     'exam'      => 'ExamController',
-        //     'theme'     => 'ThemeController',
-        //     'quest'     => 'QuestController',
-        //     'rank'      => 'RankController',
-        // ]);
+        Route::post('file-import', 'DashboardController@import')->name('file.import');
     });
 });
 //Home
 Route::namespace('Page')->prefix('/')->group(function () {
-    Route::get('/', 'HomeController@index')->name('page.home');
-    // Route::get('/endTest', 'HomeController@index')->name('page.home');
-    Route::resources([
-            'test'   => 'TestController',
-        //     'teacher'   => 'TeacherController',
-        //     'exam'      => 'ExamController',
-        //     'theme'     => 'ThemeController',
-        //     'quest'     => 'QuestController',
-        //     'rank'      => 'RankController',
-        ]);
+
+    Route::prefix('auth')->namespace('Auth')->group(function () {
+        Route::get('/login', 'AuthController@showLogin')->name('page.show.login');
+        Route::post('login', 'AuthController@handleLogin')->name('page.handle.login');
+
+        Route::get('/logout', 'AuthController@handleLogout')->name('page.handle.logout');
+    });
+
+    Route::get('/', 'HomeController@index')->name('page.index');
+   
+    Route::get('/history', 'HomeController@history')->name('page.history');
+    Route::get('/{theme}', 'HomeController@show')->name('theme.show');
+    Route::get('/test/vertify/{subject}', 'TestController@vertify')->name('test.vertify');
+    Route::get('/test/detail/{id}', 'TestController@detail')->name('test.detail');
+    Route::post('/test/create', 'TestController@create')->name('test.create');
+    Route::resource('test', 'TestController')->only([
+        'store'
+    ]);
+    Route::resource('feedback', 'FeedBackController')->only([
+        'create', 'store'
+    ]);
     
 });

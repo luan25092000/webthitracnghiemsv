@@ -15,6 +15,7 @@ class ListingController extends Controller
         $configs = $model->listingConfigs();
         $records = $model->getRecords();
         // dd($configs[6]['records'][7]);
+        
         return view('admin.listing', [
             'user' => $adminUser,
             'records' => $records,

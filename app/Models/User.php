@@ -69,6 +69,24 @@ class User extends Base implements AuthenticatableContract {
         );
         return array_merge($listingConfigs, $defaultConfigs);
     }
+    public $rules = [
+        'name'    => 'required',
+        'email' => 'required|unique:users,email',
+        'password' => 'required',
+    ];
+    public function rulesUpdate($id){        
+        return $rules = [
+            'name'    => 'required',
+            'email' => 'required|unique:users,email,'.$id,
+            'password' => 'required',
+        ];
+    }
+    public $messages = [
+            'name.required' => 'Tên không được để trống',
+            'email.required' => 'Email không được để trống',
+            'email.unique' => 'Email này đã được sử dụng',
+            'password.required' => 'Password không được để trống'
+        ];
     /**
      * The attributes that are mass assignable.
      *

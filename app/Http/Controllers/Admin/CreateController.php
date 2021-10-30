@@ -15,15 +15,15 @@ class CreateController extends Controller
         $model = '\App\Models\\' . ucfirst($modelName);
         $model = new $model;
         $configs = $model->creatingConfigs();
-        $dataOrther = '';
-        foreach ($configs as $config) {
-            if($config['type'] == 'relationship') {
-                $modelOrther = '\App\Models\\' . $config['model'];
-                $modelOrther = new $modelOrther;
-                $dataOrther =  $modelOrther->getRelaRecord();
-                break;
-            }
-        }
+        // $dataOrther = '';
+        // foreach ($configs as $config) {
+        //     if($config['type'] == 'relationship') {
+        //         $modelOrther = '\App\Models\\' . $config['model'];
+        //         $modelOrther = new $modelOrther;
+        //         $dataOrther =  $modelOrther->getRelaRecord();
+        //         break;
+        //     }
+        // }
         return view('admin.creating', [
             'user' => $adminUser,
             'modelName' => $modelName,
@@ -33,7 +33,7 @@ class CreateController extends Controller
     }
 
     public function store(Request $request, $modelName) {
-        // dd($request->all());
+        dd($request->all());
         $adminUser = Auth::guard('admin')->user();
         $model = '\App\Models\\' . ucfirst($modelName);
         $model = new $model;
@@ -47,7 +47,14 @@ class CreateController extends Controller
         foreach ($configs as $config) {
             if (!empty($config['creating']) && $config['creating'] == true) {
                 switch ($config['type']) {
-                    case "file":                       
+                    case "file":    
+                        if($request->has('file_'.$config['field'])){
+                            $file = $config['field'] == 'image'?  $request->file_image : $request->file_video;
+                            $extension = $file->extension();
+                            $file_name = time().'-'.$config['field'].'.'.$extension;
+                            $file->move(public_path('uploads/'.$config['field']),$file_name);
+                            $dataStore[$config['field']] =  $file_name;
+                        }                            
                         break;
                     case "show_table": 
                             $dataRela = explode(",", substr($request->input($config['field']), 0, -1));
@@ -77,6 +84,7 @@ class CreateController extends Controller
                 }
             }
         }  
+        dd($dataStore);
         $modelAfter = $model::create($dataStore);
 
         if (!empty($modelOrther)) {

@@ -23,10 +23,10 @@
     </div>
 @endif
 @if (empty($data))
-<form action="{{ route('create.store',['model' => $modelName]) }}" method="POST">
+<form action="{{ route('create.store',['model' => $modelName]) }}" method="POST" enctype="multipart/form-data" />
     @csrf
 @else
-<form action="{{ route('editing.update',['model' => $modelName, 'id' => $data->id ]) }}" method="POST">
+<form action="{{ route('editing.update',['model' => $modelName, 'id' => $data->id ]) }}" method="POST" enctype="multipart/form-data" />
     @csrf @method('PUT')
 @endif
     @if (!empty($configs))
@@ -100,6 +100,7 @@
                     </div>
                 </div>
                 <div id="form-sum" <?= !empty($data) ? '' : 'style="display: none"' ?> class="form-group">
+                    <hr>
                     <div class="row">
                         <div class="col-sm-8">
                             <label class="" for="">Đáp án</label>
@@ -124,13 +125,13 @@
                                                 required
                                                 maxlength="255"><?= $dataOrther[$i]['description']; ?></textarea>
                                     </div>
-                                    <div class="col-sm-2 text-center form-check">
+                                    <div class="col-sm-2 text-center form-check" style="margin-left: 100px;max-width:90px">
                                         <label class="text-center form-check-label">
                                         <input type="checkbox" class="form-check-input" <?= ($dataOrther[$i]['is_correct']=='1') ? 'checked' : '' ?> name="is_correct[{{ $dataOrther[$i]['id'] }}]"  style="cursor: pointer">
                                         </label>
                                     </div>
-                                    <div class="col-sm-2 text-center answer-remove" data-count="{{ $i }}">
-                                        <i class="mdi mdi-close-box-outline" style="font-size:23px;cursor:pointer;color='red'"></i>
+                                    <div class="col-sm-2 text-center answer-remove" data-count="{{ $i }}" style="margin-top: 8px;">
+                                        <i class="mdi mdi-close-box-outline" style="margin-left: 55px;font-size:23px;cursor:pointer;color='red'"></i>
                                     </div>
                                 </div>
                             </div>
@@ -147,22 +148,23 @@
                                             required
                                             maxlength="255"></textarea>
                                 </div>
-                                <div class="col-sm-2  form-check">
+                                <div class="col-sm-2  form-check" style="margin-left: 100px;max-width:90px">
                                     <label class="text-center form-check-label">
                                     <input type="checkbox" class="form-check-input"  name="is_correct[1]" value="1" style="cursor: pointer">
                                     </label>
                                 </div>
-                                <div class="col-sm-2 text-center answer-remove" data-count="1">
-                                    <i class="mdi mdi-close-box-outline" style="font-size:17px;cursor:pointer;color:red"></i>
+                                <div class="col-sm-2 text-center answer-remove" data-count="1" style="margin-top: 8px;">
+                                    <i class="mdi mdi-close-box-outline" style="margin-left: 55px;font-size:17px;cursor:pointer;color:red"></i>
                                 </div>
                             </div>
                         </div>
                     @endif
                     <div style="margin-top: 20px;">
                         <a href="javascript: void(0)"
-                           style="border-radius: 5px; border: 1px solid #288ad6; padding: 10px 20px; text-decoration: none;"
+                           style="border-radius: 5px; border: 1px solid #288ad6; padding: 5px 10px; text-decoration: none;"
                            id="add-answer">Thêm đáp án</a>
                     </div>
+                    <hr>
                 </div>
                     @break
                 @case("hidden")
@@ -322,14 +324,14 @@
                         '   required\n' +
                         '   maxlength="255"></textarea>\n' +
                         '   </div>\n' +
-                        '   <div class="col-sm-2 text-center form-check">\n' +
+                        '   <div class="col-sm-2 text-center form-check" style="margin-left: 100px;max-width:90px">\n' +
                         '   <label class="form-check-label">\n' +
                         '   <input class="form-check-input" type="checkbox" name="is_correct['+(Number(count) + 1)+']" value="0" style="cursor: pointer">\n' +
                         '   <i class="input-helper"></i>\n' +
                         '   </label>\n' +
                         '   </div>\n' +
-                        '   <div class="col-sm-2 text-center answer-remove" data-count="'+(Number(count) + 1)+'">\n' +
-                        '   <i class="mdi mdi-close-box-outline" style="font-size:17px;cursor:pointer;color:red"></i>\n' +
+                        '   <div class="col-sm-2 text-center answer-remove" data-count="'+(Number(count) + 1)+'" style="margin-top: 8px;">\n' +
+                        '   <i class="mdi mdi-close-box-outline" style="margin-left: 55px;font-size:17px;cursor:pointer;color:red"></i>\n' +
                         '   </div>\n' +
                         '   </div>';
                     $('#form-summary').append(html);

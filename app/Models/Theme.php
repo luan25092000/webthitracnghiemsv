@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Base
+class Theme extends Base
 {
     use HasFactory;
     protected $table = 'themes';
@@ -82,6 +82,8 @@ class Room extends Base
     public function students(){
         return $this->hasMany(User::class);
     }
-
-    
+    public function subjects(){
+        return $this->hasMany(Subject::class);
+    }
+   
 }

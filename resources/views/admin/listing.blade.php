@@ -6,14 +6,25 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/dataTable.min.css') }}">  
   
   <link rel="stylesheet" type="text/css" href=" https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap4.min.css">  
-  <link rel="stylesheet" href="admin/style-listing.css">
+  <link rel="stylesheet" href="{{ asset('admin/css/style-listing.css') }}">
 @stop
 
 @section('title')
     <h4 class="card-title">{{ $title }}</h4>
-    <p class="card-description">
+    <div class="d-sm-flex home-tab align-items-center justify-content-between ">
+      <p class="card-description">
         ---------- <code>Danh sách</code>
       </p>
+      @if ($modelName == 'user')
+      <form action="{{ route('file.import') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <label for="file-upload" class="custom-file-upload btn btn-primary text-white">
+          <i class="icon-download"></i> Import
+        </label>
+        <input type="file" onchange="this.form.submit()" name="file" id="file-upload" />
+        </form>
+      @endif
+    </div>
 @stop
 
 @section('main')
@@ -71,13 +82,13 @@
                             $result = explode("/", $record[$config['field']]); 
                             $score = $result[0]*(10/$result[1]);
                         ?>
-                        <td>{{ number_format($score, 2, '.', '') }}/10</td>
+                        <td>{{ number_format($score, 2, '.', '') }}/ 10</td>
                         @break
                       @case("relaOfRela")
                         <td>{{ $record->{$config['relation']}->{$config['get']}->{$config['value']} }}</td>
                        @break
                       @case("count")
-                        <td>{{ $config['records'][$record['id']] }}</td>
+                        <td>{{ $record->{$config['field']} }}</td>
                         @break
                       @case("is_multiple")
                         @foreach ($config['values'] as $value)

@@ -23,11 +23,11 @@
           <div class="header">
                 <div class="row">
                   <div class="form-group" style="width:20%">
-                    <label for="room">Lớp</label>
-                      <select class="form-control" id="room" name="room">
+                    <label for="theme">Lớp</label>
+                      <select class="form-control" id="theme" name="theme">
                         <option>Vui lòng chọn lớp</option>
-                        @foreach ($rooms as $room)
-                          <option value="{{ $room->id }}">{{ $room->name }}</option>
+                        @foreach ($themes as $theme)
+                          <option value="{{ $theme->id }}">{{ $theme->name }}</option>
                         @endforeach
                       </select>
                   </div>

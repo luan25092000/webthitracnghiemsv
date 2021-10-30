@@ -110,6 +110,35 @@ class Question extends Base
         );
         return array_merge($listingConfigs, $defaultConfigs);
     }
+
+    public $rules = [
+        'name'    => 'required|max:255',
+        'level'    => 'required',
+        'is_multiple'    => 'required',
+        'answer'    => 'required',
+        'is_correct'    => 'required',
+        // 'file_image' => '',
+        // 'file_video' => '',
+    ];
+    public function rulesUpdate($id){        
+        return $rules = [
+            'name'    => 'required|max:255',
+            'level'    => 'required',
+            'is_multiple'    => 'required',
+            'answer'    => 'required',
+            'is_correct'    => 'required',
+            // 'file_image' => '',
+            // 'file_video' => '',
+        ];
+    }
+    public $messages = [
+            'name.required' => 'Câu hỏi không được để trống',
+            'level.required' => 'Cấp độ không được để trống',
+            'answer.required' => 'Câu trả lời không được để trống',
+            'is_correct.required' => 'Vui lòng chọn đáp án đúng',
+            'is_multiple.required' => 'Vui lòng chọn có nhiều câu hỏi hay không'
+        ];
+
     public function getRecords() {
         return self::all();
     }
@@ -136,5 +165,7 @@ class Question extends Base
     public function subject(){
         return $this->belongsToMany(Subject::class, 'question_mapping');
     }
-    
+    public function results(){
+        return $this->belongsToMany(Result::class, 'result_mapping')->withPivot('selected')->withTimestamps();
+    }
 }

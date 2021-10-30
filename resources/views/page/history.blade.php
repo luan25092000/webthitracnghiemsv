@@ -1,113 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lịch sử thi</title>
-</head>
-<body>
+@extends('page.layouts.template')
+
+@section('css')
+<!-- Css for this page -->
+<link rel="stylesheet" type="text/css" href="{{ asset('page/css/history.css') }}">
+@stop
+
+@section('main')
     <div class="container">
-        <div class="main col-8 mb-5">
-            <h1>Chi tiết bài thi</h1>
-            <p class="subject-title"><span style="width: 80px;display: inline-block">Đề thi: </span><b></b></p>
-            <p class="sinvien-fullname"><span style="width: 80px;display: inline-block">Sinh viên: </span><b>Demo</b></p>
-        </div>
         <div class="row">
-            <div class="col-8" style="margin-bottom: 100px">
-                <?php if(!empty($data['detail'])): ?>
-                    <form action="">
-                        <?php $count = 1; foreach ($data['detail'] as $detail): ?>
-                        <div class="quiz-question">
-                            <div class="quiz-question-title">
-                                <h2>
-                                    <span><?= $count; ?></span>
-                                    <div><?= $detail['question_name']; ?></div>
+            <div class="col-12">
+                <section class="ftco-section">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 text-center mb-5">
+                                <h2 class="heading-section">
+                                    Các lần thi của thí sinh<br><b>{{ Auth::user()->name }}</b>
                                 </h2>
                             </div>
-    
-                            <?php
-                            require_once "./mvc/models/AnswerModel.php";
-                            $model = new AnswerModel();
-                            $answers = $model->getAnswerByQuestionId($detail['question_id']);
-                            ?>
-    
-                            <?php foreach ($answers as $answer): ?>
-                                <div class="quiz-question-answer">
-                                <?php if(isset($detail['selected'])): ?>
-                                    <div class="answer-radio">
-                                        <?php if ($detail['is_multiple']): ?>
-                                        <?php $selected = explode(',', $detail['selected']); ?>
-                                            <input class="form-check-input answer-checkbox"
-                                                type="checkbox"
-                                                <?= (in_array($answer['answer_id'], $selected)) ? 'checked' : ''; ?>
-                                                name="option-<?= $answer['answer_id']; ?>"
-                                                value="<?= $detail['question_id']; ?>-<?= $answer['answer_id']; ?>">
-                                        <?php else: ?>
-                                            <input type="radio"
-                                                name="option-<?= $detail['question_id']; ?>"
-                                                    <?= ($detail['selected'] == $answer['answer_id']) ? 'checked' : ''; ?>
-                                                value="<?= $detail['question_id']; ?>-<?= $answer['answer_id']; ?>">
-                                        <?php endif; ?>
-                                        <label for="question-1">
-                                            <?= $answer['answer_description']; ?>
-                                            <?php if ($answer['is_correct']): ?>
-                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                            <?php endif; ?>
-                                        </label>
-                                    </div>
-                                <?php else: ?>
-                                    <div class="answer-radio">
-                                        <?php if ($detail['is_multiple']): ?>
-                                            <input class="form-check-input answer-checkbox"
-                                                type="checkbox"
-                                                name="option-<?= $answer['answer_id']; ?>"
-                                                value="<?= $detail['question_id']; ?>-<?= $answer['answer_id']; ?>">
-                                        <?php else: ?>
-                                            <input type="radio"
-                                                name="option-<?= $detail['question_id']; ?>"
-                                                value="<?= $detail['question_id']; ?>-<?= $answer['answer_id']; ?>">
-                                        <?php endif; ?>
-                                        <label for="question-1">
-                                            <?= $answer['answer_description']; ?>
-                                            <?php if ($answer['is_correct']): ?>
-                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                            <?php endif; ?>
-                                        </label>
-                                    </div>
-                                <?php endif; ?>
-                                </div>
-                            <?php endforeach; ?>
+                            @if (count($records))
+                            <div class="col-md-6 text-center mb-5">
+                                <h2 class="heading-section">
+                                    Kết quả lần thi gần nhất<br>
+                                    <b style="color: #f8bd32;font-size: 50px;">
+                                        {{ $records[count($records)-1]->result }}
+                                    </b>
+                                </h2>
+                            </div>
+                            @endif                           
                         </div>
-                        <?php $count++; endforeach; ?>
-                    </form>
-                <?php else: ?>
-                    <div>Bài làm bỏ trắng</div>
-                <?php endif; ?>
-            </div>
-            <div class="col-4">
-                <h3 class="another-theme">Chủ đề</h3>
-                <?php foreach ($data['themes'] as $theme): ?>
-                    <div class="col-12 another-theme-item">
-                        <div class="card">
-                            <div class="cart-custom">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= $theme['name']; ?></h5>
-                                </div>
-                                <div class="test-number">
-                                    <h5><?= $theme['test_number']; ?></h5>
-                                    <small>đề thi</small>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-wrap">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Đề thi</th>
+                                                <th>Lớp</th>
+                                                <th>Level</th>
+                                                <th>Số câu đúng/Tổng số câu</th>
+                                                <th>Điểm thi</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (!count($records))
+                                                <tr class="alert" role="alert">
+                                                    <td colspan="7">Bạn chưa thi lần nào</td>
+                                                </tr>
+                                            @else
+                                                @foreach ($records as $key => $record)
+                                                <?php
+                                                    $item = explode("/", $record->result);
+                                                    $score = $item[0]*(10/$item[1]);
+                                                ?>
+                                                <tr class="alert" role="alert">
+                                                    <th scope="row">{{ $key+1 }}</th>
+                                                    <td>{{ $record->subject->name }}</td>
+                                                    <td>{{ $record->subject->theme->name }}</td>
+                                                    <td>{{ $record->subject->level }}</td>
+                                                    <td>{{ $record->result }}</td>
+                                                    <td><?= number_format($score, 2, '.', '') ?>/10</td>
+                                                    <td>
+                                                        <a href="{{ route('test.detail',['id' => $record->id]) }}" class="test-detail" style="color: #fff">Xem chi tiết</a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <a href="?url=subject/execute/<?= $theme['theme_id'] ?>" class="btn btn-detail">
-                                <i class="fa fa-chevron-circle-right"></i>
-                                Xem chi tiết
-                            </a>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                </section>
             </div>
         </div>
     </div>
-</body>
-</html>
+@stop

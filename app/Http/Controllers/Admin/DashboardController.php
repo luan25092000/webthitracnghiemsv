@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Result;
-use App\Models\Room;
 use App\Models\Subject;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
 
 class DashboardController extends Controller
 {
     public function index(){
         $adminUser = Auth::guard('admin')->user();
-        $modelName = 'result';
         $model = new Result();
         $configs = $model->listingConfigs();
         $records = $model->getRecords();        
@@ -37,14 +37,14 @@ class DashboardController extends Controller
             'user' => $adminUser,
             'records' => $records,
             'configs' => $configs,
-            'modelName' => $modelName,
+            'modelName' => 'result',
             'title' => $model->title,
         ]);
     }
     public function rank(){
-        $rooms = Room::all();
+        $themes = Theme::all();
         return view('admin.rank', [
-            'rooms' => $rooms
+            'themes' => $themes
         ]);
     }
 
@@ -59,8 +59,17 @@ class DashboardController extends Controller
         $data = Subject::where('theme_id', $request->id)->get();
         return $data;
     }
-    public function profile(){
-        return view('admin.profile');
+    public function profile(Result $result, $rank){
+        return view('admin.profile',[
+            'result' => $result,
+            'rank'   => $rank
+        ]);
+    }
+
+    public function import(Request $request) 
+    {
+        Excel::import(new UsersImport, $request->file('file')->store('temp'));
+        return back();
     }
    
 }

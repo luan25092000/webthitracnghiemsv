@@ -49,7 +49,17 @@ class Admin extends Base implements AuthenticatableContract
             array(
                 'field' => 'level',
                 'name' => 'Vị trí',
-                'type' => 'text',
+                'type' => 'select',
+                'values' => [
+                    [
+                        'value' => '1',
+                        'name' => 'Giáo Viên',
+                    ],
+                    [
+                        'value' => '0',
+                        'name' => 'Admin',
+                    ]
+                ],
                 'listing' => true,
                 'creating' => false
             )           

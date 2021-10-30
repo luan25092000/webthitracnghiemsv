@@ -54,7 +54,14 @@ class EditController extends Controller
         foreach ($configs as $config) {
             if (!empty($config['creating']) && $config['creating'] == true) {
                 switch ($config['type']) {
-                    case "file":                       
+                    case "file":  
+                        if($request->has('file_'.$config['field'])){
+                            $file = $config['field'] == 'image'?  $request->file_image : $request->file_video;
+                            $extension = $file->extension();
+                            $file_name = time().'-'.$config['field'].'.'.$extension;
+                            $file->move(public_path('uploads/'.$config['field']),$file_name);
+                            $dataStore[$config['field']] =  $file_name;
+                        }                            
                         break;
                     case "count":                       
                         break;
@@ -86,6 +93,7 @@ class EditController extends Controller
                 }
             }
         }
+        
         $model::where('id', $id)->update($dataStore);
         
         return redirect()->route('listing.index',['model' => $modelName])->with('success','Thay đổi thành công');

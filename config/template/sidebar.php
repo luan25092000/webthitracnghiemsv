@@ -44,12 +44,12 @@
                 [
                     'label' => 'Danh sách',
                     'route' => 'listing.index',
-                    'model' => 'room',
+                    'model' => 'theme',
                 ],
                 [
                     'label' => 'Tạo mới',
                     'route' => 'create.index',
-                    'model' => 'room',
+                    'model' => 'theme',
                 ]
             ]
         ],[
@@ -82,6 +82,17 @@
                     'label' => 'Tạo mới',
                     'route' => 'create.index',
                     'model' => 'subject',
+                ]
+            ]
+        ],[
+            'label' => 'Góp ý từ sinh viên',
+            'icon' => 'comment-multiple-outline',
+            'tag'   => 'feedbacks',
+            'items' => [
+                [
+                    'label' => 'Danh sách',
+                    'route' => 'listing.index',
+                    'model' => 'idea'
                 ]
             ]
         ],[

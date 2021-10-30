@@ -48,3 +48,9 @@ main{
 .content{
     background-color: whitesmoke;
 }
+
+@media print {
+    #printPageButton {
+      display: none;
+    }
+  }

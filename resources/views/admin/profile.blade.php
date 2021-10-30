@@ -6,16 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{{ asset('admin/css/profile.css') }}">
 </head>
 <body>
     <div class="container">
         <div class="main">
             <div class="topbar">
-                <a href="">logout</a>
-                <a href="">support</a>
-                <a href="">work</a>
-                <a href="">home</a>
             </div>
             <div class="row">
                 <div class="col-md-4 mt-1">
@@ -24,11 +20,6 @@
                             <img src="{{ asset('admin/images/avatar.svg') }}" alt="" class="rounded-circle" width="150">
                             <div class="mt-3">
                                 <h3>Burk Macklin</h3>
-                                <a href="">Home</a>
-                                <a href="">work</a>
-                                <a href="">support</a>
-                                <a href="">setting</a>
-                                <a href=""></a>
                             </div>
                         </div>
                     </div>
@@ -39,10 +30,10 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <h5>Full Name</h5>
+                                    <h5>Tên</h5>
                                 </div>
                                 <div class="col-md-9 text-secondary">
-                                    Burt Macklin
+                                    {{ $result->student->name }}
                                 </div>
                             </div>
                             <hr>
@@ -51,38 +42,58 @@
                                     <h5>Email</h5>
                                 </div>
                                 <div class="col-md-9 text-secondary">
-                                    abc@gmail.com
+                                    {{ $result->student->email }}
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <h5>phone</h5>
+                                    <h5>Số điện thoại</h5>
                                 </div>
                                 <div class="col-md-9 text-secondary">
-                                    0987654
+                                    {{ $result->student->phone }}
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <h5>Address</h5>
+                                    <h5>Ngày sinh</h5>
                                 </div>
                                 <div class="col-md-9 text-secondary">
-                                    street ABC
+                                    {{ $result->student->birthday }}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card mb-3 content">
-                        <h1 class="m-3">Recent Project</h1>
+                        <h1 class="m-3">Đề thi</h1>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <h5>Project Name</h5>
+                                    <h5>{{ $result->subject->name }}</h5>
                                 </div>
                                 <div class="col-md-9 text-secondary">
-                                    Project Description
+                                    {{ $result->subject->description }}
+                                </div>
+                            </div>
+                            <?php
+                                $item = explode("/",$result->result);
+                                $score = $item[0] * (10/$item[1]);
+                            ?>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Điểm thi</h5>
+                                </div>
+                                <div class="col-md-9 text-secondary">
+                                    {{ number_format($score, 2, '.', '') }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Xếp hạng</h5>
+                                </div>
+                                <div class="col-md-9 text-secondary">
+                                    {{ $rank }}
                                 </div>
                             </div>
                         </div>
@@ -90,8 +101,10 @@
                 </div>
             </div>
         </div>
-        <button onclick="history.back()" id="printPageButton" class="btn btn-info"><i class="fa fa-print"></i>Quay lại</button>
-        <button onclick="window.print()" id="printPageButton" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+        
+            <button onclick="history.back()" id="printPageButton" class="btn btn-info">Quay lại</button>
+            <button onclick="window.print()" id="printPageButton" class="btn btn-info">Print</button>
+        
     </div>
 </body>
 </html>

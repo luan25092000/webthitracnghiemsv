@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Test Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('page/test.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ asset('page/css/test.css') }}">
 </head>
 <body>
     <div class="container">
@@ -88,8 +88,8 @@
                         </div>
                     </div>
                     <div class="buttons flex-column">
-                        <button class="restart">Replay Quiz</button>
-                        <button class="quit">Quit Quiz</button>
+                        <a href="{{ route('page.index') }}"><button class="restart">Trang chủ</button></a>
+                        <a href=""><button class="quit">Xem chi tiết</button></a>
                     </div>
                 </div>
                 
@@ -99,9 +99,10 @@
     
 <script >
     let questions = <?= $questions ?>;
+    let time = <?= $time ?>;
 </script>
-<script src="{{ asset('page/test.js') }}"></script>
-<script src="{{ asset('page/countdown.js') }}"></script>
+<script src="{{ asset('page/js/test.js') }}"></script>
+<script src="{{ asset('page/js/countdown.js') }}"></script>
 
 
 </body>
