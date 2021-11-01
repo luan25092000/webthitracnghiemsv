@@ -33,7 +33,6 @@ class HomeController extends Controller
     public function history() {
         $user = Auth::user()->id;
         $records = Result::with('student', 'subject')->where('student_id', $user)->get();  
-        // dd(count($records));
         foreach ($records as $record) {
             switch ($record->subject->level) {
                 case '1':

@@ -35,6 +35,7 @@ class EditController extends Controller
             'dataOrther' => $dataOrther,
             'configs' => $configs,
             'title' => $model->title,
+            'descript' => 'Thay đổi',
         ]);
     }
 

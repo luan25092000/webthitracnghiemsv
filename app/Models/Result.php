@@ -80,7 +80,6 @@ class Result extends Base
     }
     
     public function excute($arrays, $subject_id) {
-        // $subject_id = 8;
         $data = [];
         foreach($arrays as $array) {
             $ansArr = explode('-', $array);
@@ -90,13 +89,16 @@ class Result extends Base
                 $data[$ansArr[0]] = $ansArr[1];
             }
         }
+       
         try {
             $userId = Auth::user()->id;
             $countFail = $this->calculate($data);
             $score = (count($data) - $countFail);
-            $result =  $score. '/' . $this->getCount($subject_id);
+            $count = $this->getCount($subject_id);
+            $result =  $score. '/' . $count;
             $endTest = [
                 'score' => $score,
+                'count' => $count,
                 'result' => $result
             ];
 
@@ -142,21 +144,16 @@ class Result extends Base
     }
 
     public function getCount($subject_id) {
-        // return DB::table('question_mapping')->where('subject_id', $subject_id)->count();
-        return self::with('questions')->where('subject_id', $subject_id)->count();
+        return Subject::with('question')->find($subject_id)->count();
     }
     public function insertResultQuestion($resultId, $data) {
         // $model = DB::table('result_mapping');
-        $model = new Result();
+        $model = Result::find($resultId);
         foreach ($data as $key => $item) {
             if (is_array($item)) {
                 $item = implode(',', $item);
             }
-            $model->questions()->insert([
-                'result_id' => $resultId,
-                'question_id' => $key,
-                'selected' => $item   
-            ]);
+            $model->questions()->attach($key, ['selected' => $item]);
         }
     }
 

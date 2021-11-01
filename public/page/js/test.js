@@ -8,6 +8,8 @@ const back_btn = document.querySelector(".nav .back_btn");
 const next_btn = document.querySelector(".nav .next_btn");
 const game = document.querySelector(".game");
 const result = document.querySelector(".result_box");
+const file = document.querySelector(".file");
+
 
 let currentQuestion = {}
 let acceptingAnswers = true
@@ -37,6 +39,11 @@ back_btn.addEventListener('click', e => {
 
     currentQuestion = questions[questionNow]
     question.innerText = currentQuestion[0].question
+    if (currentQuestion[0].image) {
+        $(".file").append('<img id="myImg" src="{{ asset("uploads/image/' + `${currentQuestion[0].image}` + '") }}" >')
+    }
+   
+
     if (currentQuestion[0].is_multi) {
         question_note.innerText = '( Có thể chọn nhiều đáp án )'
         is_multi = true
@@ -81,6 +88,7 @@ nextStep = () => {
     
     currentQuestion = questions[questionNow]
     question.innerText = currentQuestion[0].question
+
     if (currentQuestion[0].is_multi) {
         question_note.innerText = '( Có thể chọn nhiều đáp án )'
         is_multi = true
@@ -112,11 +120,7 @@ nextStep = () => {
 
 getNewQuestion = () => {
     if( questionCounter >= MAX_QUESTIONS) {
-        // alert(selectedAnswer)
-        game.classList.remove('activeGame')
-        result.classList.add('activeResult')
-        document.getElementById('request-input').value = selectedAnswer;
-        // document.getElementById('request-form').submit();
+        endGame()
     }
     questionNow = questionCounter
     questionCounter++
@@ -129,6 +133,10 @@ getNewQuestion = () => {
     
     currentQuestion = questions[questionNow]
     question.innerText = currentQuestion[0].question
+    if (currentQuestion[0].image) {
+        $(".file").append('<img id="myImg" src="{{ asset("uploads/image/' + `${currentQuestion[0].image}` + '") }}" >')
+    }
+
     if (currentQuestion[0].is_multi) {
         question_note.innerText = '( Có thể chọn nhiều đáp án )'
         is_multi = true

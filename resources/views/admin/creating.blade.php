@@ -12,16 +12,20 @@
 @section('title')
     <h4 class="card-title">{{ $title }}</h4>
     <p class="card-description">
-        ---------- <code>Thêm mới</code>
+        ---------- <code>{{ $descript }}</code>
       </p>
 @stop
 
 @section('main')
 @if (Session::has('success'))           
     <div class="alert alert-success" style="margin:0 20%  0 ">
-        <strong>{{ Session::get('success') }}</strong>
+      <strong>{{ Session::get('success') }}</strong>
     </div>
-@endif
+@elseif (Session::has('danger'))           
+  <div class="alert alert-danger" style="margin:0 20%  0 ">
+      <strong>{{ Session::get('danger') }}</strong>
+  </div>
+@endif    
 @if (empty($data))
 <form action="{{ route('create.store',['model' => $modelName]) }}" method="POST" enctype="multipart/form-data" />
     @csrf
@@ -193,6 +197,7 @@
                         @enderror
                     </div>
             @endswitch
+           
         @endforeach
         <button type="submit" class="btn btn-primary me-2">Submit</button>
     @endif 

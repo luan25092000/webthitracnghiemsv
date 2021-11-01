@@ -29,11 +29,11 @@ class CreateController extends Controller
             'modelName' => $modelName,
             'configs' => $configs,
             'title' => $model->title,
+            'descript' => 'Thêm mới',
         ]);
     }
 
     public function store(Request $request, $modelName) {
-        dd($request->all());
         $adminUser = Auth::guard('admin')->user();
         $model = '\App\Models\\' . ucfirst($modelName);
         $model = new $model;

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Test Page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="{{ asset('page/css/test.css') }}">
@@ -29,6 +30,11 @@
             </div>
             <h1 id="question" class="text-center">TC co may ngoi?</h1>
             <h4 id="question_note" class="text-center" ></h4>
+            <div class="d-flex justify-content-center file">
+                
+                <video id='myVi' src="{{ asset('uploads/video/1635740165-video.mp4') }}"controls></video>
+            </div>
+            
             <div class="ans ">
                 <div class="row">
                     <div class="col">
@@ -66,20 +72,14 @@
                 <button class="back_btn">Back Que</button>
                 <button class="next_btn">Next Que</button>
             </div>
-        </div>
-        <form action="{{ route('test.store') }}" id="request-form" method="POST">
-            @csrf
-            <input type="hidden" value="" name="result" id="request-input" />
-            <input type="hidden" value="{{ $subject_id }}" name="subject_id"  />
-        </form>
-   
+        </div>   
             <div class="result_box">
                 <div class="icon">
                     <h2>Chúc mừng bạn đã hoàn thành bài thi!!</h2>
                 </div>
                 <div class="container-fluid" style="color: ">
-                    <h2>Thí sinh : Demo</h2>
-                    <div class="detail_text">
+                    <h2>Thí sinh : {{ Auth::user()->name }}</h2>
+                    <div id="detail" class="detail_text">
                         <span>Số lượng đúng: 10/10</span>
                     </div>
                     <div class="complete_text text-center">Điểm của bạn:
@@ -88,21 +88,24 @@
                         </div>
                     </div>
                     <div class="buttons flex-column">
-                        <a href="{{ route('page.index') }}"><button class="restart">Trang chủ</button></a>
-                        <a href=""><button class="quit">Xem chi tiết</button></a>
+                        <a href="{{ route('page.index') }}" class="restart">Trang chủ</a>
+                        <a href="{{ route('page.history') }}" class="quit">Xem chi tiết</a>
                     </div>
                 </div>
                 
             </div>
         </div>
     
-    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script >
     let questions = <?= $questions ?>;
     let time = <?= $time ?>;
+    let subject_id = <?= $subject_id ?>;
 </script>
-<script src="{{ asset('page/js/test.js') }}"></script>
 <script src="{{ asset('page/js/countdown.js') }}"></script>
+<script src="{{ asset('page/js/result.js') }}"></script>
+<script src="{{ asset('page/js/test.js') }}"></script>
+
 
 
 </body>

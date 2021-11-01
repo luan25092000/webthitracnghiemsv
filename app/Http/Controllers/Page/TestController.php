@@ -36,6 +36,8 @@ class TestController extends Controller
             $tamp[0] = [
                 'question_id' => $value->id,
                 'question' => $value->name,
+                'image' => $value->image,
+                'video' => $value->video,
                 'is_multi' => $value->is_multiple ? true : false
             ];
             foreach ($value->answers as $answer) {
@@ -57,11 +59,10 @@ class TestController extends Controller
     }
 
     public function store(Request $request) {
-        // dd($request->all());
+       
         $data = explode(",", substr($request->result, 0, -1));
         $a = new Result();
-        $b = $a->excute($data, $request->subject_id);
-        return $b;
+        return $a->excute($data, $request->subject_id);
     }
 
     public function detail($id) {

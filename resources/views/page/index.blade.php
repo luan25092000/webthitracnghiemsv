@@ -24,6 +24,15 @@
     </form>
 </div>
 <div class="container">
+@if (Session::has('success'))           
+    <div class="alert alert-success" style="margin:0 20%  0 ">
+      <strong>{{ Session::get('success') }}</strong>
+    </div>
+@elseif (Session::has('danger'))           
+  <div class="alert alert-danger" style="margin:0 20%  0 ">
+      <strong>{{ Session::get('danger') }}</strong>
+  </div>
+@endif 
     <h1>Danh Sách Các Lớp Học</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4">
         @foreach ($datas as $data)

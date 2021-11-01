@@ -8824,6 +8824,7 @@ strong {
 
 small, .small {
   font-size: 0.875em;
+  color : red;
 }
 
 mark, .mark {
