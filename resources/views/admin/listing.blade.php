@@ -28,16 +28,15 @@
 @stop
 
 @section('main')
-  @if (Session::has('success'))           
-  <div class="alert alert-success" style="margin:0 20%  0 ">
+@if (Session::has('success'))           
+    <div class="alert alert-success" style="margin:0 20%  0 ">
       <strong>{{ Session::get('success') }}</strong>
-  </div>
-  @endif
-  @if (Session::has('danger'))           
+    </div>
+@elseif (Session::has('danger'))           
   <div class="alert alert-danger" style="margin:0 20%  0 ">
       <strong>{{ Session::get('danger') }}</strong>
   </div>
-  @endif    
+@endif    
     <div class="row">   
       <div class="card-body">
         <div class="table-responsive">

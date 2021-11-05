@@ -10,6 +10,8 @@
 }
 body {
     background-color: rgb(29, 26, 26);
+    max-height: 100%;
+    overflow: hidden;
 }
 
 .game {
@@ -103,6 +105,8 @@ body {
 }
 
 .nav{
+    position: sticky !important;
+    bottom: 35% ;
     height: 60px;
     padding: 0 30px;
     display: flex;
@@ -138,6 +142,13 @@ body {
     transform: scale(0.95);
     transition: all 0.3s ease;
 }
+
+img, video {
+    margin: 10px;
+    height: 250px;
+    width: auto;
+}
+
 .nav button:hover{
     background: #0263ca;
 }
@@ -148,7 +159,7 @@ body {
     transform: scale(1);
 }
 #question_note {
-    color: white;  
+    color: white; 
 }
 
 .container-fluid {
@@ -221,27 +232,30 @@ body {
     margin: 0 auto;
 }
 
-.result_box .buttons button{
+.result_box .buttons a{
     margin: 0 10px;
     height: 45px;
-    padding: 0 20px;
+    padding: 8px 20px;
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
     border: none;
+    z-index: 100;
+    text-align: center;;
     outline: none;
     border-radius: 5px;
     border: 1px solid #007bff;
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
-.buttons button.restart{
+.buttons a.restart{
     color: #fff;
     background: #007bff;
     margin-bottom: 5px;
 }
 
-.buttons button.restart:hover{
+.buttons a.restart:hover{
     background: #0263ca;
 }
 

@@ -69,7 +69,7 @@ class DashboardController extends Controller
     public function import(Request $request) 
     {
         Excel::import(new UsersImport, $request->file('file')->store('temp'));
-        return back();
+        return redirect()->back()->with('success', 'Import thành công');
     }
    
 }

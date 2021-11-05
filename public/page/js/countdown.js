@@ -40,10 +40,8 @@ function secpass() {
     } else {
         
         clearInterval(countDown);
-        document.getElementById('request-input').value = selectedAnswer;
-            game.classList.remove('activeGame')
-            result.classList.add('activeResult')
-        //         // document.getElementById('request-form').submit();
+        endGame();
+       
         
         
     }
