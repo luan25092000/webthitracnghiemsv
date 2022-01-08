@@ -3,12 +3,12 @@
 @endphp
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Đăng nhập admin</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+  <title>Admin</title>
   <!-- plugins:css -->
   <!-- Custom CSS -->
 
@@ -41,10 +41,10 @@
           </button>
         </div>
         <div>
-          <a class="navbar-brand brand-logo" href="{{ route('admin.dashboard.index') }}">
+          <a class="navbar-brand brand-logo" href="{{ route('dashboard.index') }}">
             <img src="{{ asset('admin') }}/images/logo.svg" alt="logo" />
           </a>
-          <a class="navbar-brand brand-logo-mini"href="{{ route('admin.dashboard.index') }}">
+          <a class="navbar-brand brand-logo-mini"href="{{ route('dashboard.index') }}">
             <img src="{{ asset('admin') }}/images/logo-mini.svg" alt="logo" />
           </a>
         </div>
@@ -52,17 +52,20 @@
       <div class="navbar-menu-wrapper d-flex align-items-top"> 
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">Xin chào, <span class="text-black fw-bold">{{ Auth::guard('admin')->user()->name }}</span></h1>          
+            <h1 class="welcome-text">Xin chào, <span class="text-black fw-bold">{{ ucfirst(Auth::guard('admin')->user()->name) }}</span></h1>          
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="{{ asset('admin') }}/images/faces/face8.jpg" alt="Profile image"> </a>
+              <img class="img-xs rounded-circle" src="{{ asset('admin') }}/images/faces/face8.jpg" alt="Profile image">
+             
+            </a>
+            
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
                 <img class="img-md rounded-circle" src="{{ asset('admin') }}/images/faces/face8.jpg" alt="Profile image">
-                <p class="mb-1 mt-3 font-weight-semibold">{{ Auth::guard('admin')->user()->name }}</p>
+                <p class="mb-1 mt-3 font-weight-semibold">{{ ucfirst(Auth::guard('admin')->user()->name) }}</p>
                 <p class="fw-light text-muted mb-0">{{ Auth::guard('admin')->user()->email }}</p>
               </div>
               
@@ -70,6 +73,7 @@
             </div>
           </li>
         </ul>
+        <h4 class="nav-link count-indicator">{{ ucfirst(Auth::guard('admin')->user()->name) }}</h4> 
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
           <span class="mdi mdi-menu"></span>
         </button>
@@ -99,7 +103,7 @@
               <ul class="nav flex-column sub-menu">
                 @foreach ($menu['items'] as $item)
                 <li class="nav-item"> 
-                  <a class="nav-link" href="{{ route($item['route']) }}" >{{ $item['label'] }}</a>
+                  <a class="nav-link" href="{{ route($item['route'],['model'=>$item['model']]) }}" >{{ $item['label'] }}</a>
                 </li>
                 @endforeach
               </ul>
@@ -119,14 +123,14 @@
                   
                   @yield('title')
                   @yield('main')
-                 
                 </div>
               </div>
-            </div>     
+            </div> 
+            @yield('support')
           </div>
-        </div>
-         
-        
+        </div>     
+      </div>
+    </div>
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
         <footer class="footer">

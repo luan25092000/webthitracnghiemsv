@@ -25,6 +25,8 @@
               element.addClass('active');
             }
           }
+        } else if (location.pathname.indexOf('editing') !== -1 && element.attr('href').indexOf(a) !== -1) {
+            element.parents('.nav-item').last().addClass('active');
         } else {
         if (element.attr('href').indexOf(current) !== -1) {
           element.parents('.nav-item').last().addClass('active');
@@ -51,7 +53,7 @@
     //  var s = location.pathname.replace(/(http|https):\/\/.*:\d+\/admin/, "");
      var current = (a+'/'+b);
     // var current = window.location;
-    // alert(current); 
+    // alert(a); 
     $('.nav li a', sidebar).each(function() {
       var $this = $(this);
       addActiveClass($this);

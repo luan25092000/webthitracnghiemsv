@@ -8824,6 +8824,7 @@ strong {
 
 small, .small {
   font-size: 0.875em;
+  color : red;
 }
 
 mark, .mark {
@@ -20857,6 +20858,7 @@ code {
 /* Bootstrap Progress */
 .progress {
   border-radius: 7px;
+  border : 1px solid;
   height: 8px;
 }
 
@@ -20873,7 +20875,7 @@ code {
 }
 
 .progress.progress-lg {
-  height: 15px;
+  height: 12px;
 }
 
 .progress.progress-xl {

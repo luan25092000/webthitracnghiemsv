@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Nova+Square&isplay=swap');
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+    font-family: 'Nova Square', cursive;
+}
+body {
+    background-color: rgb(29, 26, 26);
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.game {
+    opacity: 0;
+}
+
+.choice-container {
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 0.8rem !important;
+    width:80%;
+    border-radius: 4px;
+    background: rgb(18, 93, 255);
+    font-size: 5rem;
+    min-width: 20rem;
+}
+
+.choice-container:hover {
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(6, 103, 247, 0.5);
+    background: rgb(18, 50, 150);
+    transform: scale(1.02);
+    transform:  transform 100ms;
+}
+
+.choice-prefix {
+    padding: 3rem 3.5rem;
+    color: white;
+}
+
+.choice-text {
+    padding: 3rem;
+    width: 100%;
+}
+
+.ans {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin: 0 auto;
+    color: white;
+    text-align: center;
+}
+
+.correct {
+    background: linear-gradient(32deg, rgba(11, 223, 36) 0%, rgb(41, 232, 111) 100%) !important;
+}
+
+.incorrect {
+    background: linear-gradient(32deg, rgba(230, 29, 29, 1) 0%, rgb(224, 11, 11, 1) 100%);
+}
+
+#question {
+    color: white;
+    padding: 2rem;
+}
+
+#hud {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hud-prefix {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.hud-main-text {
+    text-align: center;
+}
+
+#progressBar {
+    width: 20rem;
+    height: 3rem;
+    border: 0.2rem solid rgb(11,223,36);
+    margin-top: 2rem;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+#progressText {
+    color: white;
+}
+
+#progressBarFull {
+    height: 100%;
+    background: rgb(11,223,36);
+    width: 0%;
+}
+
+.nav{
+    position: sticky !important;
+    bottom: 35% ;
+    height: 60px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav .total_que span{
+    display: flex;
+    user-select: none;
+}
+.nav .total_que span p{
+    font-weight: 500;
+    padding: 0 5px;
+}
+.nav .total_que span p:first-child{
+    padding-left: 0px;
+}
+.nav button{
+    height: 40px;
+    padding: 0 13px;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    background: #007bff;
+    border: 1px solid #007bff;
+    line-height: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+    transition: all 0.3s ease;
+}
+
+img, video {
+    margin: 10px;
+    height: 250px;
+    width: auto;
+}
+
+.nav button:hover{
+    background: #0263ca;
+}
+
+.nav button.show{
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+#question_note {
+    color: white; 
+}
+
+.container-fluid {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.score_text {
+    padding: 8px;
+    font-size: 17px;
+}
+
+.game.activeGame,
+.result_box.activeResult{
+    opacity: 1;
+    /* z-index: 5; */
+    pointer-events: auto;
+}
+
+.result_box{
+    margin: auto ;
+    margin-top: 0%;
+    width: 50%;
+    border: 3px solid #56f717;
+    padding: 10px;
+    background: #1e0052;
+    border-radius: 5px;
+    display: flex;
+    padding: 25px 30px;
+    width: 450px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    transform: transform(-50%, -50%) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.result_box .icon{
+    font-size: 30px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.result_box .complete_text{
+    font-size: 20px;
+    font-weight: 500;
+    padding : 20px
+}
+
+.result_box .detail_text span{
+    display: flex;
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.result_box .detail_text span p{
+    padding: 0 4px;
+    font-weight: 600;
+}
+
+.result_box .buttons{
+    display: flex;
+    margin: 20px 0;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.result_box .buttons a{
+    margin: 0 10px;
+    height: 45px;
+    padding: 8px 20px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    z-index: 100;
+    text-align: center;;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.buttons a.restart{
+    color: #fff;
+    background: #007bff;
+    margin-bottom: 5px;
+}
+
+.buttons a.restart:hover{
+    background: #0263ca;
+}
+
+.buttons button.quit{
+    color: #007bff;
+    background: #fff;
+}
+
+.buttons button.quit:hover{
+    color: #fff;
+    background: #007bff;
+}

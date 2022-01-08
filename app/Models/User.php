@@ -4,14 +4,89 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
-{
-    use HasApiTokens, HasFactory, Notifiable;
 
+class User extends Base implements AuthenticatableContract {
+
+    use HasApiTokens, HasFactory, Notifiable,Authenticatable;
+    public $title = "Quản lý sinh viên";
+
+    public function getsubject() {
+        return self::where('level', '!=', 0)->get();
+    }
+    // public function saveModel($array) {
+    //     return self::create($array);
+    // }
+    public function configs() {
+        $defaultConfigs = parent::defaultConfigs();
+        $listingConfigs = array(
+            array(
+                'field' => 'id',
+                'name' => '#',
+                'type' => 'text',
+                'listing' => true,
+                'creating' => false
+            ),
+            array(
+                'field' => 'name',
+                'name' => 'Tên sinh viên',
+                'type' => 'text',
+                'listing' => true,
+                'creating' => true
+            ),
+            array(
+                'field' => 'email',
+                'name' => 'Email sinh viên',
+                'type' => 'text',
+                'listing' => true,
+                'creating' => true
+            ),
+            array(
+                'field' => 'password',
+                'name' => 'Mật khẩu',
+                'type' => 'password',
+                'listing' => false,
+                'creating' => true
+            ),
+            array(
+                'field' => 'birthday',
+                'name' => 'Ngày sinh',
+                'type' => 'date',
+                'listing' => true,
+                'creating' => true
+            ),
+            array(
+                'field' => 'phone',
+                'name' => 'Số điện thoại',
+                'type' => 'text',
+                'listing' => true,
+                'creating' => true
+            )
+        );
+        return array_merge($listingConfigs, $defaultConfigs);
+    }
+    public $rules = [
+        'name'    => 'required',
+        'email' => 'required|unique:users,email',
+        'password' => 'required',
+    ];
+    public function rulesUpdate($id){        
+        return $rules = [
+            'name'    => 'required',
+            'email' => 'required|unique:users,email,'.$id,
+            'password' => 'required',
+        ];
+    }
+    public $messages = [
+            'name.required' => 'Tên không được để trống',
+            'email.required' => 'Email không được để trống',
+            'email.unique' => 'Email này đã được sử dụng',
+            'password.required' => 'Password không được để trống'
+        ];
     /**
      * The attributes that are mass assignable.
      *
@@ -43,4 +118,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function class() {
+        return $this->belongsTo(Room::class);
+    }
+    public function result() {
+        return $this->hasMany(Result::class);
+    }
 }
