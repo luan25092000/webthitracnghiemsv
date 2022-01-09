@@ -95,7 +95,11 @@
                 
             </div>
         </div>
-    
+    {{-- <form action="{{ route('test.store') }}" method="post" id="myForm">
+        @csrf
+        <input type="hidden" value="8-144,9-123,9-121,10-43,"  name="result">
+        <input type="hidden" value="4" name="subject_id">
+    </form> --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script >
     let questions = <?= $questions ?>;

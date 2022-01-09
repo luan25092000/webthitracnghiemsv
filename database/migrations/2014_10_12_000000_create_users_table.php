@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->text('phone')->nullable();
             $table->date('birthday');
+            $table->bigInteger('theme_id')->unsigned()->index();
+            $table->foreign('theme_id')->references('id')->on('theme')->onDelete('set null');
             $table->rememberToken();
             $table->timestamps();
         });

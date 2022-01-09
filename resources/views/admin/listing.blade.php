@@ -3,7 +3,7 @@
 @section('css')
   
     <!-- DataTables -->
-  <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/dataTable.min.css') }}">  
+  <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/dataTable.min.css') }}">  
   
   <link rel="stylesheet" type="text/css" href=" https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap4.min.css">  
   <link rel="stylesheet" href="{{ asset('admin/css/style-listing.css') }}">
@@ -56,13 +56,28 @@
                       @case("number")
                         <td>{{ $record[$config['field']] }}</td>
                         @break
+                      @case("textarea")
+                        <?php
+                            $arr = explode(' ', $record[$config['field']]);
+                            $description = '';
+                            if (count($arr) > 10) {
+                                foreach(array_slice($arr,0,10) as $word){
+                                    $description .= ' ' . $word;
+                                }
+                                $description .= '...';
+                            } else {
+                                $description = $record[$config['field']];
+                            }
+                          ?>
+                        <td>{{ $description }}</td>
+                        @break
                       @case("date")
                         <td>{{ date_format(new DateTime ($record[$config['field']]), 'd/m/Y') }}</td>
                         @break
                       @case("progress")
                         <?php 
                             $result = explode("/", $record[$config['field']]); 
-                            $score = $result[0]*(10/$result[1])*10;
+                            $score = number_format($result[0]*(10/$result[1])*10, 1, '.', '');
                         ?>
                           <td>
                             <div>

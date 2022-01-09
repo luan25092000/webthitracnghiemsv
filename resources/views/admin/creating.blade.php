@@ -3,8 +3,8 @@
 @section('css')
   
    <!-- Plugin css for this page -->
-   <link rel="stylesheet"  href="{{ asset('backend') }}/vendors/select2/select2.min.css">
-   <link rel="stylesheet"  href="{{ asset('backend') }}/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+   <link rel="stylesheet"  href="{{ asset('admin') }}/vendors/select2/select2.min.css">
+   <link rel="stylesheet"  href="{{ asset('admin') }}/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
    <!-- End plugin css for this page -->
  
 @stop
@@ -292,18 +292,13 @@
 @stop
 @section('js')
 
-<script src="{{asset('backend')}}/vendors/typeahead.js/typeahead.bundle.min.js"></script>
-<script src="{{asset('backend')}}/vendors/select2/select2.min.js"></script>
-<script src="{{asset('backend')}}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="{{asset('admin')}}/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+<script src="{{asset('admin')}}/vendors/select2/select2.min.js"></script>
+<script src="{{asset('admin')}}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script>
    $(document).ready(function() {
-       $('#membershipRadios1').on('change', function () {
-           var value = $(this).val();
-           if (value) {
-               $('#form-sum').show();
-           } else {
-               $('#form-sum').hide();
-           }
+        $('body').on('change', '#membershipRadios1', function () {
+          $('#form-sum').show();
        });
        $('body').on('click', '.answer-remove', function () {
        var item = $(this).attr('data-count');

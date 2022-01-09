@@ -53,6 +53,17 @@ class User extends Base implements AuthenticatableContract {
                 'creating' => true
             ),
             array(
+                'field' => 'theme_id',
+                'name' => 'Lớp',
+                'type' => 'select_rela',
+                'relation' => 'theme',
+                'get' => 'name',
+                'model' => 'Class',
+                'records' => Theme::select('id', 'name')->get(),
+                'listing' => false,
+                'creating' => true
+            ),
+            array(
                 'field' => 'birthday',
                 'name' => 'Ngày sinh',
                 'type' => 'date',
@@ -72,20 +83,17 @@ class User extends Base implements AuthenticatableContract {
     public $rules = [
         'name'    => 'required',
         'email' => 'required|unique:users,email',
-        'password' => 'required',
     ];
     public function rulesUpdate($id){        
         return $rules = [
             'name'    => 'required',
             'email' => 'required|unique:users,email,'.$id,
-            'password' => 'required',
         ];
     }
     public $messages = [
             'name.required' => 'Tên không được để trống',
             'email.required' => 'Email không được để trống',
             'email.unique' => 'Email này đã được sử dụng',
-            'password.required' => 'Password không được để trống'
         ];
     /**
      * The attributes that are mass assignable.

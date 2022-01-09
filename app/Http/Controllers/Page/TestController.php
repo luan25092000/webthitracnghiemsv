@@ -23,12 +23,12 @@ class TestController extends Controller
         
         $model = Subject::with('question')->find($request->id);
         
-        // if (!Hash::check($request->pass, $model->password)) {
-        //     return redirect()->back()->with("invalid","Mật khẩu không đúng, vui lòng đăng nhập lại");
-        // }
-        // if ($model->user_id != auth()->id()) {
-        //     return redirect()->back()->with("danger","Bạn không thuộc lớp học này!");
-        // }
+        if (!Hash::check($request->pass, $model->password)) {
+            return redirect()->back()->with("invalid","Mật khẩu không đúng, vui lòng đăng nhập lại");
+        }
+        if ($model->user_id != auth()->id()) {
+            return redirect()->back()->with("danger","Bạn không thuộc lớp học này!");
+        }
        
         $data = [];
         foreach ($model->question as $value) {

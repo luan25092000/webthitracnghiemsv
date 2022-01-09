@@ -58,17 +58,18 @@ Route::namespace('Page')->prefix('/')->group(function () {
     });
 
     Route::get('/', 'HomeController@index')->name('page.index');
-   
-    Route::get('/history', 'HomeController@history')->name('page.history');
     Route::get('/{theme}', 'HomeController@show')->name('theme.show');
-    Route::get('/test/vertify/{subject}', 'TestController@vertify')->name('test.vertify');
-    Route::get('/test/detail/{id}', 'TestController@detail')->name('test.detail');
-    Route::post('/test/create', 'TestController@create')->name('test.create');
-    Route::resource('test', 'TestController')->only([
-        'store'
-    ]);
-    Route::resource('feedback', 'FeedBackController')->only([
-        'create', 'store'
-    ]);
-    
+
+    Route::group(['middleware' => 'check.user.login'], function() {
+        Route::get('/history', 'HomeController@history')->name('page.history');
+        Route::get('/test/vertify/{subject}', 'TestController@vertify')->name('test.vertify');
+        Route::get('/test/detail/{id}', 'TestController@detail')->name('test.detail');
+        Route::post('/test/create', 'TestController@create')->name('test.create');
+        Route::resource('test', 'TestController')->only([
+            'store'
+        ]);
+        Route::resource('feedback', 'FeedBackController')->only([
+            'create', 'store'
+        ]);
+    });
 });

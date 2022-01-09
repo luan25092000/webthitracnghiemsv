@@ -27,7 +27,6 @@ class Subject extends Question
         'password' => 'required',
         'theme_id' => 'required',
         'time' => 'required',
-        'question_ids' => 'required|nullable',
         'level' => 'required',
     ];
     public function rulesUpdate($id){        
@@ -37,7 +36,6 @@ class Subject extends Question
             'password' => 'required',
             'theme_id' => 'required',
             'time' => 'required',
-            'question_ids' => 'required|nullable',
             'level' => 'required',
         ];
     }
@@ -48,9 +46,7 @@ class Subject extends Question
             'password.required' => 'Password không được để trống',
             'theme_id.required' => 'Trường lớp học không được để trống',
             'time.required' => 'Thời gian làm bài không được để trống',
-            'question_ids.required' => 'Vui lòng chọn câu hỏi',
             'level.required' => 'Vui lòng chọn cấp độ cho bài thi',
-            'question_ids.nullable' => 'Vui lòng chọn câu hỏi',
         ];
 
     public function createData($dataArr, $subject_id) {  

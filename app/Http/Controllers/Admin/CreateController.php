@@ -57,8 +57,10 @@ class CreateController extends Controller
                         }                            
                         break;
                     case "show_table": 
-                            $dataRela = explode(",", substr($request->input($config['field']), 0, -1));
-                            $modelOrther =  $model;                    
+                            if (!empty($request->input($config['field']))) {
+                                $dataRela = explode(",", substr($request->input($config['field']), 0, -1));
+                                $modelOrther =  $model;       
+                            }
                         break;
                     case "relationship": 
                             $modelOrther = '\App\Models\\' . $config['model'];
@@ -84,7 +86,7 @@ class CreateController extends Controller
                 }
             }
         }  
-        dd($dataStore);
+        // dd($dataStore);
         $modelAfter = $model::create($dataStore);
 
         if (!empty($modelOrther)) {
