@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Admin;
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CheckLogin
+class CheckUserLogin
 {
     /**
      * Handle an incoming request.
@@ -18,10 +18,10 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('admin')->check()){
+        if (Auth::guard('web')->check()){
             return $next($request);
         } else {
-            return redirect()->route('auth.show.login')->with('success','Xin vui lòng đăng nhập');
+            return redirect()->route('page.show.login')->with('success','Xin vui lòng đăng nhập');
         }
     }
 }

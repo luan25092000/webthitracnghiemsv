@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     public function index() {
-        $datas = Theme::withCount('subjects')->get();
+        $datas = Theme::withCount('subjects')->search()->paginate(12);
         return view('page.index',[
             'datas' => $datas
         ]);

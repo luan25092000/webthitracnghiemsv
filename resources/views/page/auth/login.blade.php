@@ -12,24 +12,23 @@
 <body>
 	<img class="wave" src="{{ asset('page/images/wave.png') }}">
 	<div class="container">
-        @if (count($errors) > 0)
-        <div class="alert alert-danger alert-dismissible mt-2">
-          <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          {{ $errors->first() }}
-        </div>
-        @endif
-        @if(Session::has('invalid'))
-        <div class="alert alert-danger alert-dismissible">
-            <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            {{Session::get('invalid')}}
-        </div>
-        @endif
-        @if(Session::has('success'))
-                <div class="alert alert-success alert-dismissible">
-                    <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    {{Session::get('success')}}
-                </div>
-        @endif
+		<div class="return-home">
+			@if (count($errors) > 0)
+				<div class="alert alert-success" >
+					<strong>{{ $errors->first() }}</strong>
+				</div>
+			@endif
+			@if(Session::has('invalid'))
+				<div class="alert alert-success" >
+					<strong>{{Session::get('invalid')}}</strong>
+				</div>
+			@endif
+			@if(Session::has('success'))
+				<div class="alert alert-success" >
+					<strong>{{Session::get('success')}}</strong>
+				</div>
+			@endif
+		</div>
 		<div class="img">
 			<img src="{{ asset('page/images/person.svg') }}">
 		</div>

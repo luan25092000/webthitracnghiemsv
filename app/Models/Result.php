@@ -93,8 +93,10 @@ class Result extends Base
         try {
             $userId = Auth::user()->id;
             $countFail = $this->calculate($data);
-            $score = (count($data) - $countFail);
-            $count = $this->getCount($subject_id);
+            $count = count($data);
+            $score = ($count - $countFail);
+            // dd(count($data));
+          
             $result =  $score. '/' . $count;
             $endTest = [
                 'score' => $score,
@@ -143,9 +145,11 @@ class Result extends Base
         return $countFail;
     }
 
-    public function getCount($subject_id) {
-        return Subject::with('question')->find($subject_id)->count();
-    }
+    // public function getCount($subject_id) {
+    //     // return 
+    //     $a = Subject::with('question')->find($subject_id)->count();
+    //     dd($a);
+    // }
     public function insertResultQuestion($resultId, $data) {
         // $model = DB::table('result_mapping');
         $model = Result::find($resultId);

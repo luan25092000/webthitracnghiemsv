@@ -13,7 +13,6 @@ class Theme extends Base
 
     public function configs() {
         $defaultConfigs = parent::defaultConfigs();
-        $defaultConfigs[1]['listing'] = 'true';
         $listingConfigs = array(
             array(
                 'field' => 'id',
@@ -85,6 +84,14 @@ class Theme extends Base
     }
     public function subjects(){
         return $this->hasMany(Subject::class);
+    }
+
+    //local Scope
+    public function scopeSearch($query) {
+        if($key = request()->key) {
+            $query = $query->where('name', 'like', '%'.$key.'%');
+        }
+        return $query;
     }
    
 }

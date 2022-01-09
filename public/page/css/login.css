@@ -25,6 +25,26 @@ body{
     grid-gap :7rem;
     padding: 0 2rem;
 }
+
+.return-home {
+    position: absolute;
+    top: 10%;
+	left: 50.6%;
+    min-width: 30%;
+}
+.alert-success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+}
+.alert {
+    position: relative;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
 /* person img */
 .img{
 	display: flex;

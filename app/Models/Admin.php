@@ -69,25 +69,28 @@ class Admin extends Base implements AuthenticatableContract
     public $rules = [
         'name'    => 'required',
         'email' => 'required|unique:admins,email',
-        'password' => 'required',
     ];
     public function rulesUpdate($id){        
         return $rules = [
             'name'    => 'required',
             'email' => 'required|unique:admins,email,'.$id,
-            'password' => 'required',
         ];
     }
     public $messages = [
             'name.required' => 'Tên không được để trống',
             'email.required' => 'Email không được để trống',
             'email.unique' => 'Email này đã được sử dụng',
-            'password.required' => 'Password không được để trống'
         ];
     public function getRecords() {
         return self::where('level', '!=', 0)->get();
-        // $a =self::where('level', '!=', 0)->get();
-        // dd($a);
+    }
+    public function routes() {
+        return ['admin', 'theme', 'user'];
+    }
+
+    public function hasPermission($route) {
+        $routes = $this->routes();
+        return in_array($route, $routes)? true : false;
     }
     // public function saveModel($array) {
     //     return self::create($array);

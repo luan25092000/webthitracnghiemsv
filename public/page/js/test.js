@@ -91,6 +91,7 @@ next_btn.addEventListener('click', e => {
     if(questionCounter = questionNow +1) {
         acceptingChanges = false
         is_last = true
+        next_btn.classList.remove("show")
         getNewQuestion()
     } else {
         nextStep()
@@ -163,7 +164,6 @@ getNewQuestion = () => {
     questionNow = questionCounter
     questionCounter++
    
-    
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
     progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
 
