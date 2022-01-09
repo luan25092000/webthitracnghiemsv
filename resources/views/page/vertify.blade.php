@@ -11,6 +11,15 @@
     <div class="container d-flex justify-content-center align-content-center" style="margin-top:8rem;margin-bottom:12.67rem;">
         <div class="row gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                @if (Session::has('success'))           
+                    <div class="alert alert-success" style="margin:0 20%  0 ">
+                    <strong>{{ Session::get('success') }}</strong>
+                    </div>
+                @elseif (Session::has('danger'))           
+                <div class="alert alert-danger" style="margin:0 20%  0 ">
+                    <strong>{{ Session::get('danger') }}</strong>
+                </div>
+                @endif  
                 <div class="h-100">
                     <h3>Đăng nhập vào phần bài làm</h3>
                     <form method="POST" action="{{ route('test.create') }}">

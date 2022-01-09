@@ -6,6 +6,7 @@ const scoreText = document.querySelector('#score');
 const progressBarFull = document.querySelector('#progressBarFull');
 const back_btn = document.querySelector(".nav .back_btn");
 const next_btn = document.querySelector(".nav .next_btn");
+const submit_btn = document.querySelector(".nav .submit_btn");
 const game = document.querySelector(".game");
 const result = document.querySelector(".result_box");
 const src = document.getElementById("file");
@@ -32,6 +33,7 @@ startGame = () => {
 }
 
 back_btn.addEventListener('click', e => {
+    submit_btn.classList.remove('show');
     questionNow--
     progressText.innerText = `Question ${questionNow+1} of ${MAX_QUESTIONS}`
     progressBarFull.style.width = `${(questionNow+1/MAX_QUESTIONS) * 100}%`
@@ -158,9 +160,6 @@ nextStep = () => {
 }
 
 getNewQuestion = () => {
-    if( questionCounter >= MAX_QUESTIONS) {
-        endGame()
-    }
     questionNow = questionCounter
     questionCounter++
    
@@ -253,17 +252,22 @@ choices.forEach(choice => {
             }, 1000)
 
         } else {
-            if(!acceptingAnswers) return
-
             acceptingAnswers = true
             selectedAnswer += valueOfChoice + ','
             
             selectedChoice.parentElement.classList.add(classToApply)
-            
-            setTimeout( () => {
-                selectedChoice.parentElement.classList.remove(classToApply)
-                getNewQuestion()
-            }, 500)
+            if (questionCounter >= MAX_QUESTIONS) {
+                submit_btn.classList.add("show");
+                next_btn.classList.remove("show");
+                return
+            } else {
+                if(!acceptingAnswers) return
+                
+                setTimeout( () => {
+                    selectedChoice.parentElement.classList.remove(classToApply)
+                    getNewQuestion()
+                }, 500)
+            }
         }
     })
 })

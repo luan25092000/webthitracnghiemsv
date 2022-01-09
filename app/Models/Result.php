@@ -83,11 +83,7 @@ class Result extends Base
         $data = [];
         foreach($arrays as $array) {
             $ansArr = explode('-', $array);
-            if (array_key_exists($ansArr[0], $data)) {
-                $data[$ansArr[0]] = [$data[$ansArr[0]], $ansArr[1]];
-            } else {
-                $data[$ansArr[0]] = $ansArr[1];
-            }
+            $data[$ansArr[0]][] = $ansArr[1];
         }
        
         try {
@@ -121,7 +117,7 @@ class Result extends Base
             $answerCorrect = $model->isCorrect($key);
             // 1 đáp án đúng.
             if (count($answerCorrect) == 1) {
-                if (is_array($value) || $value != $answerCorrect[0]['id']) {
+                if (is_array($value) && (int)$value[0] != $answerCorrect[0]['id']) {
                     $countFail++;
                     continue;
                 }

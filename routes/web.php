@@ -61,7 +61,7 @@ Route::namespace('Page')->prefix('/')->group(function () {
     Route::get('/{theme}', 'HomeController@show')->name('theme.show');
 
     Route::group(['middleware' => 'check.user.login'], function() {
-        Route::get('/history', 'HomeController@history')->name('page.history');
+        Route::get('/page/history', 'HomeController@history')->name('history');
         Route::get('/test/vertify/{subject}', 'TestController@vertify')->name('test.vertify');
         Route::get('/test/detail/{id}', 'TestController@detail')->name('test.detail');
         Route::post('/test/create', 'TestController@create')->name('test.create');

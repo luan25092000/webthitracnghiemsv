@@ -19,12 +19,13 @@ endGame = () => {
             'subject_id': subject_id
         },
         dataType: 'json',
-        success: function (data) {
-            detail_text.firstElementChild.innerText = 'Số lượng đúng: ' + data.result;
-            score_text.innerText = Math.round((data.score / data.count) * 10 * 100) / 100;
+        success: function (res) {
+            if (res.status == 200) {
+                $("#box-result-container").html(res.data);
+            }
         },
-        error: function(data) {
-            var errors = $.parseJSON(data.responseText);
+        error: function(res) {
+            var errors = $.parseJSON(res.responseText);
         }
     });
 }

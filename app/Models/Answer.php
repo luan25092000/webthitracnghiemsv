@@ -16,10 +16,9 @@ class Answer extends Base
         $answers = $array['answer'];
         $isCorrectArr = $array['is_correct'];
         foreach ($answers as $key => $answer) {
-            $isCorrect = !empty($isCorrectArr[$key][0]) ? 1 : 0;
             $data[$key] = [
                 'description' => $answer[0],
-                'is_correct' => $isCorrect,
+                'is_correct' => isset($isCorrectArr[$key]) ? $isCorrectArr[$key] : 0,
                 'question_id' => $questionId
             ];
         }

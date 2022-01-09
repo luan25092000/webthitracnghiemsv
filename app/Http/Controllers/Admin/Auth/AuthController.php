@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
 use App\Http\Requests\LoginAdminRequest;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -16,6 +17,7 @@ class AuthController extends Controller
     public function handleLogin(LoginAdminRequest $request) {
         if (Auth::guard('admin')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             $admin = Admin::where([['email','=',$request->input('email')]])->first();
+            Session::put('level', $admin->level);
             Auth::guard('admin')->login($admin);
             return redirect()->route('dashboard.index')->with("success", "Đăng nhập thành công");
         }
@@ -26,6 +28,7 @@ class AuthController extends Controller
 
     public function handleLogout() {
         Auth::guard('admin')->logout();
+        Session::forget('level');
         return redirect()->route('auth.show.login')->with('success','Đăng xuất thành công');
     }
 }

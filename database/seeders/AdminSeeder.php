@@ -23,6 +23,5 @@ class AdminSeeder extends Seeder
             'level' => 0,
             'remember_token' => Str::random(10),
         ]);
-        Admin::factory()->count(10)->create();
     }
 }

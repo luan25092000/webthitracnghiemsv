@@ -27,7 +27,6 @@ class EditController extends Controller
             }
         }
 
-        // dd($dataOrther);
         return view('admin.creating', [
             'user' => $adminUser,
             'modelName' => $modelName,
@@ -40,7 +39,6 @@ class EditController extends Controller
     }
 
     public function update(Request $request, $modelName, $id) {
-        // dd($request->all());
         $adminUser = Auth::guard('admin')->user();
         $model = '\App\Models\\' . ucfirst($modelName);
         $model = new $model;

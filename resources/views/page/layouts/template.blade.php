@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" type="image/png" href="{{asset('favicon.ico')}}" />
+    <link rel="shortcut icon" type="image/png" href="{{asset('page/images/logo.png')}}" />
     <title>Trắc nghiệm trực tuyến</title>
     <!-- Font Awaesome -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
@@ -29,7 +29,7 @@
     <div class="navbar-dark bg-dark">
         <nav class="navbar navbar-expand-md container navbar-dark bg-dark">
             <a href="{{ route('page.index') }}" class="navbar-brand">
-                <img src="{{ asset('page/images/logo.png') }}" height="100" width="100" alt="CoolBrand">
+                <img style="background-color:white;border-radius:50px;" src="{{ asset('page/images/logo.png') }}" height="100" width="100" alt="CoolBrand">
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
                 <div class="navbar-nav menu-content">
                     <a href="{{ route('page.index') }}" class="nav-item nav-link active">Trang chủ</a>
                     @auth
-                    <a href="{{ route('page.history') }}" class="nav-item nav-link">Lịch sử thi</a>
+                    <a href="{{ route('history') }}" class="nav-item nav-link">Lịch sử thi</a>
                     <a href="{{ route('feedback.create') }}" class="nav-item nav-link">Góp ý</a>
                     @endauth
                 </div>
@@ -68,63 +68,15 @@
     @yield('main')
     {{-- FOOTER --}}
     <footer class="page-footer bg-dark">
-
-        <div class="bg-success">
-          <div class="container">
-            <div class="row py-4 d-flex align-items-center">
-             
-              <div class="col-md-12 text-center"> 
-                  <a href="#"><i class="fab fa-facebook-f white-text mr-4"> </i></a>         
-                  <a href="#"><i class="fab fa-twitter white-text mr-4"> </i></a>
-                  <a href="#"><i class="fab fa-google-plus-g white-text mr-4"> </i></a>
-                  <a href="#"><i class="fab fa-linkedin-in white-text mr-4"> </i></a>
-                  <a href="#"><i class="fab fa-instagram white-text"> </i></a> 
-                 </div>
-      
-           </div>
-          </div>
-        </div>
-      
         <div class="container text-center text-md-left mt-5">
           <div class="row">
       
-            <div class="col-md-3 mx-auto mb-4">
-              <h6 class="text-uppercase font-weight-bold">The Providers</h6>
-              <hr class="bg-success mb-4 mt-0 d-inline-block mx-auto" style="width: 125px; height: 2px">
-              <p class="mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-            </div>
-      
-            <div class="col-md-2 mx-auto mb-4">
-              <h6 class="text-uppercase font-weight-bold">Products</h6>
-              <hr class="bg-success mb-4 mt-0 d-inline-block mx-auto" style="width: 85px; height: 2px">
-             
-               <ul class="list-unstyled">
-                  <li class="my-2"><a href="#">Html 5</a></li>        
-                  <li class="my-2"><a href="#">Css 3</a></li>
-                  <li class="my-2"><a href="#">Bootstrap 4</a></li>
-                  <li class="my-2"> <a href="#">JavaScript</a></li>         
-                </ul>
-            </div>
-        
-            <div class="col-md-2 mx-auto mb-4">
-              <h6 class="text-uppercase font-weight-bold">Useful links</h6>
-              <hr class="bg-success mb-4 mt-0 d-inline-block mx-auto" style="width: 110px; height: 2px">
-                <ul class="list-unstyled">
-                  <li class="my-2"><a href="#">Home</a></li>        
-                  <li class="my-2"><a href="#">About</a></li>
-                  <li class="my-2"><a href="#">Services</a></li>
-                  <li class="my-2"> <a href="#">Contact</a></li>         
-                </ul>
-            </div>
-      
-            <div class="col-md-3 mx-auto mb-4">
-              <h6 class="text-uppercase font-weight-bold">Contact</h6>
+            <div class="col-md-12 mx-auto mb-4">
               <hr class="bg-success mb-4 mt-0 d-inline-block mx-auto" style="width: 75px; height: 2px">
                 <ul class="list-unstyled">
                   <li class="my-2"><i class="fas fa-home mr-3"></i> Cộng Hòa, phường 2, Tân Bình</li>
                   <li class="my-2"><i class="fas fa-envelope mr-3"></i> kmaABC@gmail.com</li>
                   <li class="my-2"><i class="fas fa-phone mr-3"></i> + 098765432</li>
-                  <li class="my-2"><i class="fas fa-print mr-3"></i> + 00987654</li>
                 </ul>
             </div>
           </div>
@@ -133,7 +85,6 @@
         <div class="footer-copyright text-center py-3">
           <p>&copy; Copyright
           <a href="#">kmaABC.com</a></p>
-          <p>Designed by The Providers</p>
         </div>
     </footer>
     {{-- END FOOTER --}}

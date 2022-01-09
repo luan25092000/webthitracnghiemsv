@@ -117,8 +117,6 @@ class Question extends Base
         'is_multiple'    => 'required',
         'answer'    => 'required',
         'is_correct'    => 'required',
-        // 'file_image' => '',
-        // 'file_video' => '',
     ];
     public function rulesUpdate($id){        
         return $rules = [
@@ -127,8 +125,6 @@ class Question extends Base
             'is_multiple'    => 'required',
             'answer'    => 'required',
             'is_correct'    => 'required',
-            // 'file_image' => '',
-            // 'file_video' => '',
         ];
     }
     public $messages = [

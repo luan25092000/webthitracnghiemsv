@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->text('phone')->nullable();
             $table->date('birthday');
             $table->bigInteger('theme_id')->unsigned()->index();
-            $table->foreign('theme_id')->references('id')->on('theme')->onDelete('set null');
+            $table->foreign('theme_id')->references('id')->on('themes')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

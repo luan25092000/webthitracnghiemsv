@@ -50,19 +50,16 @@ class Theme extends Base
     public function getRecords() {
         return self::all();
     }
-    // public function saveModel($array) {
-    //     return self::create($array);
-    // }
+
     public $rules = [
             'name'    => 'required|max:255',
-            'description' => 'required|max:255',
+            'description' => 'max:255',
         ];
     
 
     public $messages = [
             'name.required' => 'Tên lớp không được để trống',
             'name.max' => 'Tên lớp của bạn quá dài! Tối đa 255 ký tự',
-            'description.required' => 'Mô tả không được để trống',
             'description.max' => 'Mô tả của bạn quá dài! Tối đa 255 ký tự'
         ];
     

@@ -15,15 +15,6 @@ class CreateController extends Controller
         $model = '\App\Models\\' . ucfirst($modelName);
         $model = new $model;
         $configs = $model->creatingConfigs();
-        // $dataOrther = '';
-        // foreach ($configs as $config) {
-        //     if($config['type'] == 'relationship') {
-        //         $modelOrther = '\App\Models\\' . $config['model'];
-        //         $modelOrther = new $modelOrther;
-        //         $dataOrther =  $modelOrther->getRelaRecord();
-        //         break;
-        //     }
-        // }
         return view('admin.creating', [
             'user' => $adminUser,
             'modelName' => $modelName,
@@ -70,7 +61,15 @@ class CreateController extends Controller
                                 if(!in_array($req, $config['field']))
                                 {
                                     foreach ($config['field'] as $field) {
-                                        $dataRela[$field] = $request->input($field);
+                                        if ($field == 'is_correct') {
+                                            $isCorrects = $request->input($field);
+                                            foreach ($isCorrects as $k => $v) {
+                                                $isCorrects[$k] = $v == "on" ? 1 : 0;
+                                            }
+                                            $dataRela[$field] =  $isCorrects;
+                                        } else {
+                                            $dataRela[$field] = $request->input($field);
+                                        }
                                     }
                                 }
                             } 
@@ -86,16 +85,13 @@ class CreateController extends Controller
                 }
             }
         }  
-        // dd($dataStore);
+
         $modelAfter = $model::create($dataStore);
 
         if (!empty($modelOrther)) {
             $dataStoreOrther = $modelOrther->createData($dataRela,$modelAfter->id);
         }
-        // if($dataStoreOrther ) {
-            return redirect()->back()->with('success','Thêm mới thành công');
-        // }     else{
-        //     return redirect()->back()->with('success','Dữ liệu bạn nhập vào không thoả');
-        // }            
+        
+        return redirect()->back()->with('success','Thêm mới thành công');       
     }
 }

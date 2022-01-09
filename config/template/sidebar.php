@@ -4,9 +4,11 @@
             'label' => 'Quản lý kết quả thi',
             'route' => 'dashboard.index',
             'icon' => 'mdi mdi-marker-check',
+            'level' => 2
         ],[
             'label' => 'Quản lý sinh viên',
             'icon' => 'account-circle-outline',
+            'level' => 0,
             'tag'   => 'ui-basic',
             'items' => [
                 [
@@ -23,6 +25,7 @@
         ],[
             'label' => 'Quản lý giáo viên',
             'icon' => 'contact-mail-outline',
+            'level' => 0,
             'tag'   => 'form-elements',
             'items' => [
                 [
@@ -40,6 +43,7 @@
             'label' => 'Quản lý lớp học',
             'icon' => 'floor-plan',
             'tag'   => 'charts',
+            'level' => 0,
             'items' => [
                 [
                     'label' => 'Danh sách',
@@ -56,6 +60,7 @@
             'label' => 'Quản lý câu hỏi',
             'icon' => 'comment-question-outline',
             'tag'   => 'tables',
+            'level' => 1,
             'items' => [
                 [
                     'label' => 'Danh sách',
@@ -72,6 +77,7 @@
             'label' => 'Quản lý đề thi',
             'icon' => 'card-text-outline',
             'tag'   => 'icons',
+            'level' => 1,
             'items' => [
                 [
                     'label' => 'Danh sách',
@@ -88,6 +94,7 @@
             'label' => 'Góp ý từ sinh viên',
             'icon' => 'comment-multiple-outline',
             'tag'   => 'feedbacks',
+            'level' => 2,
             'items' => [
                 [
                     'label' => 'Danh sách',

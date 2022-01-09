@@ -18,7 +18,7 @@ class CheckUserLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('web')->check()){
+        if (Auth::check()){
             return $next($request);
         } else {
             return redirect()->route('page.show.login')->with('success','Xin vui lòng đăng nhập');

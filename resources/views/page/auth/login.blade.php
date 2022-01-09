@@ -14,12 +14,12 @@
 	<div class="container">
 		<div class="return-home">
 			@if (count($errors) > 0)
-				<div class="alert alert-success" >
+				<div class="alert alert-invalid" >
 					<strong>{{ $errors->first() }}</strong>
 				</div>
 			@endif
 			@if(Session::has('invalid'))
-				<div class="alert alert-success" >
+				<div class="alert alert-invalid" >
 					<strong>{{Session::get('invalid')}}</strong>
 				</div>
 			@endif
@@ -57,7 +57,6 @@
 						</div>
 					</div>
 				</div>
-            	<a href="#">Quên Mật Khẩu?</a>
             	<input type="submit" class="btn" value="Đăng Nhập">
             </form>
         </div>

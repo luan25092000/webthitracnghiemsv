@@ -69,37 +69,15 @@
                 
             </div>
             <div class="nav">
-                <button class="back_btn">Back Que</button>
-                <button class="next_btn">Next Que</button>
+                <button class="back_btn">Back</button>
+                <button class="next_btn">Next</button>
+                <button class="submit_btn" onclick="endGame()">Submit</button>
             </div>
-        </div>   
-            <div class="result_box">
-                <div class="icon">
-                    <h2>Chúc mừng bạn đã hoàn thành bài thi!!</h2>
-                </div>
-                <div class="container-fluid" style="color: ">
-                    <h2>Thí sinh : {{ Auth::user()->name }}</h2>
-                    <div id="detail" class="detail_text">
-                        <span>Số lượng đúng: 10/10</span>
-                    </div>
-                    <div class="complete_text text-center">Điểm của bạn:
-                        <div class="score_text">
-                            10
-                        </div>
-                    </div>
-                    <div class="buttons flex-column">
-                        <a href="{{ route('page.index') }}" class="restart">Trang chủ</a>
-                        <a href="{{ route('page.history') }}" class="quit">Xem chi tiết</a>
-                    </div>
-                </div>
-                
-            </div>
+        </div> 
+        <div id="box-result-container">  
+            @include('page.includes.box')
         </div>
-    {{-- <form action="{{ route('test.store') }}" method="post" id="myForm">
-        @csrf
-        <input type="hidden" value="8-144,9-123,9-121,10-43,"  name="result">
-        <input type="hidden" value="4" name="subject_id">
-    </form> --}}
+        </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script >
     let questions = <?= $questions ?>;

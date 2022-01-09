@@ -46,7 +46,7 @@
                 @case("textarea")
                     <div class="form-group">
                         <label for="{{ $config['field'] }}">{{ $config['name'] }}</label>
-                        <textarea class="form-control" style="height:auto" name="{{ $config['field'] }}"  placeholder="Nhập {{ strtolower($config['name']) }}"  required rows="4"><?= empty($data)? old($config['field']) : $data->{$config['field']}?></textarea>
+                        <textarea class="form-control" style="height:auto" name="{{ $config['field'] }}"  placeholder="Nhập {{ strtolower($config['name']) }}" rows="4"><?= empty($data)? old($config['field']) : $data->{$config['field']}?></textarea>
                         @error($config['field'])
                             <small class="help-block">{{ $message }}</small>
                         @enderror
@@ -54,7 +54,7 @@
                     @break
                 @case("file")
                     <div class="form-group">
-                        <label for="file_{{ $config['field'] }}">Ảnh câu hỏi (không bắt buộc)</label>
+                        <label for="file_{{ $config['field'] }}">{{ $config['name'] }}</label>
                         <br>
                         <input type="{{ $config['type'] }}"  name="file_{{ $config['field'] }}" accept="<?=strcmp($config['field'],'image') ? 'video/mp4' :'image/x-png,image/gif,image/jpeg,image/jpg'?>" />
                     </div>
@@ -92,7 +92,7 @@
                     <label class="col-sm-3 col-form-label">{{ $config['name'] }}</label>
                     <div class="row">
                         @foreach ($config['values'] as $value)
-                            <div class="col-sm-1">
+                            <div class="col-sm-3">
                                 <div class="form-check" >
                                     <label class="form-check-label">
                                     <input type="radio"  class="form-check-input" name="{{ $config['field'] }}" id="membershipRadios1" value={{ $value['value'] }} <?= (isset($data) && $data->{$config['field']} == $value['value']) ? 'checked' : ''; ?>>
@@ -129,7 +129,7 @@
                                                 required
                                                 maxlength="255"><?= $dataOrther[$i]['description']; ?></textarea>
                                     </div>
-                                    <div class="col-sm-2 text-center form-check" style="margin-left: 100px;max-width:90px">
+                                    <div class="col-sm-2 text-center form-check">
                                         <label class="text-center form-check-label">
                                         <input type="checkbox" class="form-check-input" <?= ($dataOrther[$i]['is_correct']=='1') ? 'checked' : '' ?> name="is_correct[{{ $dataOrther[$i]['id'] }}]"  style="cursor: pointer">
                                         </label>
@@ -152,9 +152,9 @@
                                             required
                                             maxlength="255"></textarea>
                                 </div>
-                                <div class="col-sm-2  form-check" style="margin-left: 100px;max-width:90px">
+                                <div class="col-sm-2  form-check">
                                     <label class="text-center form-check-label">
-                                    <input type="checkbox" class="form-check-input"  name="is_correct[1]" value="1" style="cursor: pointer">
+                                    <input type="checkbox" class="form-check-input"  name="is_correct[1]" style="cursor: pointer">
                                     </label>
                                 </div>
                                 <div class="col-sm-2 text-center answer-remove" data-count="1" style="margin-top: 8px;">
@@ -324,9 +324,9 @@
                         '   required\n' +
                         '   maxlength="255"></textarea>\n' +
                         '   </div>\n' +
-                        '   <div class="col-sm-2 text-center form-check" style="margin-left: 100px;max-width:90px">\n' +
+                        '   <div class="col-sm-2 text-center form-check">\n' +
                         '   <label class="form-check-label">\n' +
-                        '   <input class="form-check-input" type="checkbox" name="is_correct['+(Number(count) + 1)+']" value="0" style="cursor: pointer">\n' +
+                        '   <input class="form-check-input" type="checkbox" name="is_correct['+(Number(count) + 1)+']" style="cursor: pointer">\n' +
                         '   <i class="input-helper"></i>\n' +
                         '   </label>\n' +
                         '   </div>\n' +

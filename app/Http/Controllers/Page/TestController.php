@@ -26,7 +26,7 @@ class TestController extends Controller
         if (!Hash::check($request->pass, $model->password)) {
             return redirect()->back()->with("invalid","Mật khẩu không đúng, vui lòng đăng nhập lại");
         }
-        if ($model->user_id != auth()->id()) {
+        if ($model->theme_id != auth()->user()->theme_id) {
             return redirect()->back()->with("danger","Bạn không thuộc lớp học này!");
         }
        
@@ -62,7 +62,11 @@ class TestController extends Controller
        
         $data = explode(",", substr($request->result, 0, -1));
         $a = new Result();
-        return $a->excute($data, $request->subject_id);
+        $res = $a->excute($data, $request->subject_id);
+        return response()->json([
+            "status" => 200,
+            "data" => view('page.includes.box', compact('res'))->render()
+        ]);
     }
 
     public function detail($id) {

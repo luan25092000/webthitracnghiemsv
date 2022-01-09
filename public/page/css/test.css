@@ -105,8 +105,6 @@ body {
 }
 
 .nav{
-    position: absolute ;
-    bottom: 35% ;
     height: 60px;
     padding: 0 30px;
     display: flex !important;
@@ -240,7 +238,7 @@ img, video {
     margin: 0 10px;
     height: 45px;
     padding: 8px 20px;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 500;
     cursor: pointer;
     border: none;
