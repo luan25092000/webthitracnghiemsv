@@ -24,7 +24,7 @@ class TestController extends Controller
         $model = Subject::with('question')->find($request->id);
         
         if (!Hash::check($request->pass, $model->password)) {
-            return redirect()->back()->with("invalid","Mật khẩu không đúng, vui lòng đăng nhập lại");
+            return redirect()->back()->with("invalid","Mật khẩu không đúng");
         }
         if ($model->theme_id != auth()->user()->theme_id) {
             return redirect()->back()->with("danger","Bạn không thuộc lớp học này!");

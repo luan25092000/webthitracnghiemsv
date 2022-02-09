@@ -66,7 +66,9 @@ class EditController extends Controller
                         break;
                     case "show_table": 
                         $dataRela =  explode(",", substr($request->input($config['field']), 0, -1));
-                        $dataStoreOrther = $model->updateData($dataRela, $id);         
+                        if ($dataRela[0] != '') {
+                            $dataStoreOrther = $model->updateData($dataRela, $id); 
+                        }
                         break;    
                     case "relationship": 
                         $modelOrther = '\App\Models\\' . $config['model'];

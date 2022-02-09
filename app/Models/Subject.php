@@ -23,7 +23,7 @@ class Subject extends Question
 
     public $rules = [
         'name'    => 'required',
-        'description' => 'required|max:255',
+        'description' => 'max:255',
         'password' => 'required',
         'theme_id' => 'required',
         'time' => 'required',
@@ -32,7 +32,7 @@ class Subject extends Question
     public function rulesUpdate($id){        
         return $rules = [
             'name'    => 'required',
-            'description' => 'required|max:255',
+            'description' => 'max:255',
             'password' => 'required',
             'theme_id' => 'required',
             'time' => 'required',
@@ -41,8 +41,7 @@ class Subject extends Question
     }
     public $messages = [
             'name.required' => 'Tên đề thi không được để trống',
-            'description.required' => 'Mô tả không được để trống',
-            'description.max' => 'Mỏ tả quá dài! tối đa 255 ký tự',
+            'description.max' => 'Mỏ tả quá dài! Tối đa 255 ký tự',
             'password.required' => 'Password không được để trống',
             'theme_id.required' => 'Trường lớp học không được để trống',
             'time.required' => 'Thời gian làm bài không được để trống',
@@ -62,7 +61,7 @@ class Subject extends Question
     }
     public function updateData($dataArr, $subject_id) {     
         $model = self::find($subject_id);     
-        // dd($dataArr); 
+        dd(($dataArr)); 
         return  $model->question()->sync($dataArr);
     }
     

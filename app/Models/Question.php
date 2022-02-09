@@ -23,7 +23,6 @@ class Question extends Base
     
     public function configs() {
         $defaultConfigs = parent::defaultConfigs();
-        $defaultConfigs[1]['listing'] = 'true';
         $listingConfigs = array(
             array(
                 'field' => ['answer', 'is_correct'],
@@ -124,6 +123,7 @@ class Question extends Base
             'level'    => 'required',
             'is_multiple'    => 'required',
             'answer'    => 'required',
+            'level'    => 'required',
             'is_correct'    => 'required',
         ];
     }

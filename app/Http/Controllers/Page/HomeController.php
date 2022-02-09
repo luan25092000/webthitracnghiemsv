@@ -33,22 +33,15 @@ class HomeController extends Controller
     public function history() {
         $user = Auth::user()->id;
         $records = Result::with('student', 'subject')->where('student_id', $user)->get();  
-        foreach ($records as $record) {
-            switch ($record->subject->level) {
-                case '1':
-                    $record->subject->level = 'Dễ';
-                    break;
-                case '2':
-                    $record->subject->level = 'Trung bình';
-                    break;               
-                default:
-                    $record->subject->level = 'Khó';
-                    break;
-            }
-        }
-
+        $levels = [
+            1 => 'Dễ',
+            2 => 'Trung bình',
+            3 => 'Khó',
+        ];
+        // dd($records);
         return view('page.history', [
-            'records' => $records
+            'records' => $records,
+            'levels' => $levels
         ]);
     }
 }

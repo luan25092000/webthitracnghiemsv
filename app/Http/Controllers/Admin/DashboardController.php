@@ -52,6 +52,7 @@ class DashboardController extends Controller
         // return $request->subject_id;
         $data = Result::with('student')
             ->where('subject_id', $request->subject_id)
+            ->orderBy('created_at', 'asc')
             ->get();
         return $data;
     } 

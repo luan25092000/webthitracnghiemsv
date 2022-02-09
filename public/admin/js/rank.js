@@ -14,6 +14,9 @@ $('#theme').change(function () {
         dataType: 'json',
         success: function (data) {
             var $subject = $('#subject');
+            $subject.children().remove();
+            if (data<1) $subject.append('<option >Không có đề thi nào </option>');
+            
             for (var i = 0; i < data.length; i++) {
                 $subject.append('<option value=' + data[i].id + '>' + data[i].name + '</option>');
             }
@@ -59,7 +62,9 @@ $("#btnShow").click(function(){
             }
             for (var i = 0; i < data.length; i++) {
                 var rank = i+1;
-                var result = data[i].result.split("/")
+                data.sort((a, b) => a.result.split("/")[0] - b.result.split("/")[0]);
+                data.reverse();
+                var result = data[i].result.split("/");
                 var score = result[0]*(10/result[1]);
                 html += '<tr>\n'+
                             '<td>'+ data[i].student.name + '</td>\n'+

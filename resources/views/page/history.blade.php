@@ -3,6 +3,11 @@
 @section('css')
 <!-- Css for this page -->
 <link rel="stylesheet" type="text/css" href="{{ asset('page/css/history.css') }}">
+<style>
+td {
+    padding:30px 0px !important;
+}
+</style>
 @stop
 
 @section('main')
@@ -38,7 +43,7 @@
                                                 <th>Đề thi</th>
                                                 <th>Lớp</th>
                                                 <th>Level</th>
-                                                <th>Số câu đúng/Tổng số câu</th>
+                                                <th style="width:30px;">Số câu đúng/Tổng số câu</th>
                                                 <th>Điểm thi</th>
                                                 <th>Action</th>
                                             </tr>
@@ -55,10 +60,10 @@
                                                     $score = $item[0]*(10/$item[1]);
                                                 ?>
                                                 <tr class="alert" role="alert">
-                                                    <th scope="row">{{ $key+1 }}</th>
+                                                    <td>{{ $key+1 }}</td>
                                                     <td>{{ $record->subject->name }}</td>
                                                     <td>{{ $record->subject->theme->name }}</td>
-                                                    <td>{{ $record->subject->level }}</td>
+                                                    <td>{{ $levels[$record->subject->level] }}</td>
                                                     <td>{{ $record->result }}</td>
                                                     <td><?= number_format($score, 2, '.', '') ?>/10</td>
                                                     <td>
