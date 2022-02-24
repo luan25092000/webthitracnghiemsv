@@ -61,7 +61,7 @@ class Subject extends Question
     }
     public function updateData($dataArr, $subject_id) {     
         $model = self::find($subject_id);     
-        dd(($dataArr)); 
+        // dd(($dataArr)); 
         return  $model->question()->sync($dataArr);
     }
     
